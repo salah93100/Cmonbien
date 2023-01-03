@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './app.css'
+import './App.css'
 import Home from './pages/Home';
 import { ChakraProvider } from '@chakra-ui/react'
 
