@@ -1,14 +1,42 @@
 import React from 'react'
+import { useState } from 'react'
 import FormStepper from '../components/bookingComponents/steps/FormStepper'
 import AdresseSelect from '../components/bookingComponents/steps/AdresseSelect'
 import HouseSelect from '../components/bookingComponents/steps/HouseSelect'
+import DetailsHouse from '../components/bookingComponents/steps/DetailsHouse'
+import SurfaceSelect from '../components/bookingComponents/steps/SurfaceSelect'
+import SaleSelect from '../components/bookingComponents/steps/SaleSelect';
+import VerificationSelect from '../components/bookingComponents/steps/VerificationSelect'
 export default function Home() {
+  
+ const [step, setStep] = useState(0);
+ const [nextStep, setNextStep] = useState(true);
+ const [booking, setBooking] = useState({
+  adress:"",
+  houseOptions:"",
+  houseType:"",
+  stageApart:{},
+  houseCharachteristics:{},
+  owner:"",
+  surface:{},
+  yearsBuild:1900,
+  removated:false,
+  nombreRoom:{},
+  sellingHouse:""
+
+ }
+  
+ );
   return (
     <>
-    <FormStepper>
-        <AdresseSelect
-        /> 
-        <HouseSelect/>
+    <FormStepper step={step} setStep={setStep} nextStep={nextStep} setNextStep={setNextStep}>
+      {console.log(booking)}
+        <AdresseSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/> 
+        <HouseSelect setBooking={setBooking} booking={booking} setNextStep={setNextStep}/>
+        <DetailsHouse setBooking={setBooking} booking={booking}/>
+        <SurfaceSelect/>
+        <SaleSelect/>
+        <VerificationSelect/>
     </FormStepper>
     </>
   )
