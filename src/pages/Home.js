@@ -35,8 +35,8 @@ export default function Home() {
         <AdresseSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/> 
         <HouseSelect setBooking={setBooking} booking={booking} setNextStep={setNextStep}/>
         <DetailsHouse setBooking={setBooking} booking={booking}/>
-        <SurfaceSelect/>
-        <SaleSelect/>
+        <SurfaceSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
+        <SaleSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
         <VerificationSelect/>
     </FormStepper>
 
