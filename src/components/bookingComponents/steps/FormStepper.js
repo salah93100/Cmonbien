@@ -1,6 +1,6 @@
-import React, { Children } from 'react'
-import BookingUI from '../BookingUI'
-import AdresseSelect from './AdresseSelect'
+import React, { Children } from 'react';
+import BookingUI from '../BookingUI';
+
 
 const FormStepper=({children,
   step,
@@ -18,9 +18,9 @@ const FormStepper=({children,
       </form>
    
     </BookingUI>
-    </>
-  )
 
-}
- 
+    </>
+  );
+};
+
 export default FormStepper;

@@ -89,8 +89,9 @@ if (!isLoaded){
        <Marker position={markerLocation}/>
       
       </GoogleMap>
+
     </div>
-  )
+  );
 }
 
 export default AdresseSelect

@@ -7,6 +7,7 @@ import DetailsHouse from '../components/bookingComponents/steps/DetailsHouse'
 import SurfaceSelect from '../components/bookingComponents/steps/SurfaceSelect'
 import SaleSelect from '../components/bookingComponents/steps/SaleSelect';
 import VerificationSelect from '../components/bookingComponents/steps/VerificationSelect'
+
 export default function Home() {
   
  const [step, setStep] = useState(0);
@@ -38,6 +39,7 @@ export default function Home() {
         <SaleSelect/>
         <VerificationSelect/>
     </FormStepper>
+
     </>
-  )
+  );
 }
