@@ -21,7 +21,8 @@ export default function Home() {
   owner:"",
   surface:{},
   yearsBuild:1900,
-  removated:false,
+  yearsRenovated:1900,
+  renovated:false,
   nombreRoom:{},
   sellingHouse:""
 
@@ -30,14 +31,14 @@ export default function Home() {
  );
   return (
     <>
-    <FormStepper step={step} setStep={setStep} nextStep={nextStep} setNextStep={setNextStep}>
+    <FormStepper step={step} setStep={setStep} nextStep={nextStep} setNextStep={setNextStep} >
       {console.log(booking)}
         <AdresseSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/> 
         <HouseSelect setBooking={setBooking} booking={booking} setNextStep={setNextStep}/>
-        <DetailsHouse setBooking={setBooking} booking={booking}/>
-        <SurfaceSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
+        <DetailsHouse setBooking={setBooking} booking={booking} setStep={setStep}/>
+        <SurfaceSelect setBooking={setBooking} booking={booking} setStep={setStep} nextStep={nextStep} setNextStep={setNextStep}/>
         <SaleSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
-        <VerificationSelect/>
+        <VerificationSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
     </FormStepper>
 
     </>

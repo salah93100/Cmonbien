@@ -61,17 +61,18 @@ if (!isLoaded){
 }
   return (
     <div className='space-y-6 w-full '>
-      <p className="px-8 py-4 bg-slate-400">C'est parti! Cela ne devrait pas vous prendre plus de 4 minutes...</p>
-      <p className="px-8 py-4 bg-slate-400">Nous sommes prêts à évaluer votre bien.</p>
+      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">C'est parti! Cela ne devrait pas vous prendre plus de 4 minutes...</p>
+      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">Nous sommes prêts à évaluer votre bien.</p>
 
      {console.log(searchResults)}
-      <Autocomplete onPlaceChanged={onPlaceChanged} onLoad={onLoad}>
-      <input type="text" name="adress"  placeholder='Adresse...' className='border-1 px-4 py-3  border border-slate-600  w-full' />
+      <Autocomplete onPlaceChanged={onPlaceChanged} onLoad={onLoad} restrictions={{ country: ["fr"] }}>
+      <input type="text" name="adress"  placeholder='Adresse...' className='border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97] w-full rounded' />
       </Autocomplete >
       <GoogleMap
        mapContainerStyle={{
-        width: '400px',
-        height: '400px'
+        width: '100%',
+        height: '300px',
+        borderradius:'4px'
       }}
        center={markerLocation}
        zoom={12}

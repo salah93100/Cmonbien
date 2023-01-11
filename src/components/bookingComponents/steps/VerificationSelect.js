@@ -1,16 +1,21 @@
 import React from "react";
+import { useState } from "react";
 
-
-const VerificationSelect=({children})=>{
+const VerificationSelect=({children,booking,setBooking})=>{
+    const [validState, setValidState] = useState({});
+    const handleChangeInput=(e)=>{
+        const {name,value}=e.target
+        setValidState({...validState,[name]:value})
+     }
     return(
 <div className="space-y-6">
-<p className="px-8 py-4 bg-slate-400">Souhaitez-vous vendre votre l'appartement ?</p>
-
+<h1 className="text-4xl text-center">Verification</h1>
+{console.log(validState)}
     <div className="flex flex-col gap-3">
-        <label>Email</label>
-    <input type="text" name="adress"  placeholder='Email' className='border-1 px-4 py-3  border border-slate-600  w-full' />
-    <input type="text" name="adress"  placeholder='Prénom' className='border-1 px-4 py-3  border border-slate-600  w-full' />
-    <input type="text" name="adress"  placeholder='Nom de famille' className='border-1 px-4 py-3  border border-slate-600  w-full' />
+      
+    <input type="text" name="email"  placeholder='Email' onChange={handleChangeInput} value={validState.email} className='inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]' />
+    <input type="text" name="firstName"  placeholder='Prénom' onChange={handleChangeInput} value={validState.firstName} className='inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]' />
+    <input type="text" name="lastName"  placeholder='Nom de famille' onChange={handleChangeInput} value={validState.lastName} className='inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]' />
 
     </div>
 </div>
