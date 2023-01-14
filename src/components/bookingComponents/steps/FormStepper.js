@@ -6,7 +6,9 @@ const FormStepper=({children,
   step,
   setStep,
   nextStep,
-  setNextStep})=>{
+  setNextStep,
+  handleSubmit,
+  onSubmit})=>{
   const stepsArray =Children.toArray(children)
   const buttonNextStepper =()=>{
 
@@ -15,16 +17,18 @@ const FormStepper=({children,
     setStep(prev=>prev+1)
 }
   }
+  
+
   return (
     <><BookingUI>
       <form onSubmit={(e)=>{e.preventDefault()}} className="space-y-6">
-      {stepsArray[step]}
+      {stepsArray[0]}
       {step<5&&step!==2&&step!==3?(<button className='px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed'
        onClick={buttonNextStepper} disabled={nextStep} >Continuer</button>
 ):("")}
 
 {step===5&& (
-  <button className='px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed' onClick={()=>setStep(prev=>prev+1)} disabled={nextStep} >Finaliser et soumettre</button>
+  <button className='px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed' onClick={handleSubmit(onSubmit)} >Finaliser et soumettre</button>
 
 )}
 

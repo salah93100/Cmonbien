@@ -70,10 +70,16 @@ const SurfaceSelect=({children,booking,setBooking,setStep})=>{
 
       const handleInput=(e)=>{
          const {name,value}=e.target
-         setBooking({...booking,[name]:JSON.parse
-            (value)})
-            setDisabled(false)
-
+         if(name==="yearsBuild"||name==="yearsRenovated"){
+            if(value.length<=4){
+            setBooking({...booking,[name]:value})
+            setDisabled(false)}
+        }
+         else{
+            console.log("sa passe")
+         setBooking({...booking,[name]:JSON.parse(value)})
+         setDisabled(false)
+}
       }
 
       const nextStepper =()=>{
@@ -165,7 +171,7 @@ Non</label>
 {stepCompoments>1&&booking.renovated===true?(<>
 <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">Année de rénovation</p>
 
-<input id="dateBuild" name="yearsRenovated" type="number" min="1900" max="2022" step="1" maxLength={4} value={booking.yearsRenovated} onChange={handleInput} className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]" />
+<input id="dateBuild" name="yearsRenovated" type="number"   maxLength="4" value={booking.yearsRenovated} onChange={handleInput} className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]" />
 </>):("")}
 {stepCompoments>2?(<><div className="w-full inline-flex flex-col gap-2">
     { ArrayCounterRoomParking.map((counter)=>{
