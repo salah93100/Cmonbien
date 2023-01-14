@@ -22,7 +22,7 @@ const FormStepper=({children,
   return (
     <><BookingUI>
       <form onSubmit={(e)=>{e.preventDefault()}} className="space-y-6">
-      {stepsArray[0]}
+      {stepsArray[step]}
       {step<5&&step!==2&&step!==3?(<button className='px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed'
        onClick={buttonNextStepper} disabled={nextStep} >Continuer</button>
 ):("")}

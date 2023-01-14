@@ -8,12 +8,13 @@ import DetailsHouse from '../components/bookingComponents/steps/DetailsHouse'
 import SurfaceSelect from '../components/bookingComponents/steps/SurfaceSelect'
 import SaleSelect from '../components/bookingComponents/steps/SaleSelect';
 import VerificationSelect from '../components/bookingComponents/steps/VerificationSelect'
-
+import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
+import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
 
 export default function Home() {
 const { register, handleSubmit, formState: { errors } } = useForm();
  const onSubmit = data => console.log(data);
- const [step, setStep] = useState(0);
+ const [step, setStep] = useState(6);
  const [nextStep, setNextStep] = useState(true);
  const [booking, setBooking] = useState({
   adress:"",
@@ -42,6 +43,8 @@ const { register, handleSubmit, formState: { errors } } = useForm();
         <SurfaceSelect setBooking={setBooking} booking={booking} setStep={setStep} nextStep={nextStep} setNextStep={setNextStep}/>
         <SaleSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep}/>
         <VerificationSelect setBooking={setBooking} booking={booking} nextStep={nextStep} setNextStep={setNextStep} register={register} errors={ errors } required/>
+        <NumComfirmation/>
+        <MessageConfirmation/>
     </FormStepper>
 
     </>
