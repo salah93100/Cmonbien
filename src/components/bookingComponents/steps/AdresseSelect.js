@@ -1,6 +1,6 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker ,Autocomplete,StandaloneSearchBox  } from '@react-google-maps/api';
-import { SkeletonText } from '@chakra-ui/react'
+import { SkeletonText ,Stack,Skeleton} from '@chakra-ui/react'
 import { useState,useRef,useEffect} from 'react';
 import {Formatrelative} from 'date-fns';
 import { getGeocode, getLatLng } from "use-places-autocomplete";
@@ -14,11 +14,7 @@ const AdresseSelect=({setBooking,booking,setNextStep,nextStep}) =>{
     }
 
   },[booking])
-  const center={
-    lat: 48.866667,
-    lng: 4.333333
-  };
-  const Adress=useRef()
+
   const [map, setMap] = useState(null);
  const [markerLocation, setMarkerLocation] = useState({
   lat: 48.866667,
@@ -57,7 +53,14 @@ const AdresseSelect=({setBooking,booking,setNextStep,nextStep}) =>{
     }
   }
 if (!isLoaded){
-  return <SkeletonText/>
+
+  return (
+    <Stack>
+    <Skeleton height='64px' />
+    <Skeleton height='64px' />
+    <Skeleton height='32px ' />
+    <Skeleton height='350px ' />
+  </Stack>)
 }
   return (
     <div className='space-y-6 w-full '>
