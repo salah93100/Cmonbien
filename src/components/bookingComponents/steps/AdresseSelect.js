@@ -19,10 +19,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
   }, [booking]);
 
   const [map, setMap] = useState(null);
-  const [markerLocation, setMarkerLocation] = useState({
-    lat: 48.866667,
-    lng: 4.333333,
-  });
+  const [markerLocation, setMarkerLocation] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -42,11 +39,8 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
         address: place.formatted_address,
       };
       setBooking({ ...booking, adress: formattedAddress.address });
-      // console.log(place);
-      console.log(`Formatted Address: ${formattedAddress.address}`);
       getGeocode(formattedAddress).then(results => {
         const { lat, lng } = getLatLng(results[0]);
-        console.log('Coordinates: ', { lat, lng });
         setMarkerLocation({ lat: lat, lng: lng });
       });
     } else {
@@ -65,18 +59,17 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
   }
   return (
     <div className="space-y-6 w-full ">
-      <p className="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
+      <p className="px-8 py-4 bg-[#f05623] rounded-md rounded-bl-none text-white">
         C'est parti! Cela ne devrait pas vous prendre plus de <span className="font-bold">4 minutes</span>...
       </p>
-      <p className="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
+      <p className="px-8 py-4 bg-[#f05623] rounded-md rounded-bl-none text-white">
         Nous sommes prêts à évaluer votre bien.
       </p>
-
-      {console.log(searchResults)}
       <Autocomplete
         onPlaceChanged={onPlaceChanged}
         onLoad={onLoad}
-        restrictions={{ country: ['fr'] }}
+        types={['address']}
+        restrictions={{ country: ['fr'],  }}
       >
         <input
           type="text"
@@ -87,21 +80,26 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
       </Autocomplete>
       <GoogleMap
         mapContainerStyle={{
-          width: '100%',
-          height: '300px',
-          borderradius: '4px',
+            width: '100%',
+            height: '300px',
+            borderRadius: '4px',
+            borderColor: '#f05623',
+            borderWidth: '2px',
         }}
-        center={markerLocation}
-        zoom={12}
+        center={markerLocation ? markerLocation : {
+            lat: 46.8,
+            lng: 2.2,
+        }}
+        zoom={markerLocation ? 18 : 5}
         options={{
-          zoomControl: false,
+          zoomControl: true,
           fullscreenControl: false,
           mapTypeControl: false,
           streetViewControl: false,
         }}
         onLoad={map => setMap(map)}
       >
-        <Marker position={markerLocation} />
+          {markerLocation ? <Marker position={markerLocation} /> : '' }
       </GoogleMap>
     </div>
   );
