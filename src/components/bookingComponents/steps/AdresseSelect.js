@@ -65,10 +65,10 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
   }
   return (
     <div className="space-y-6 w-full ">
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-        C'est parti! Cela ne devrait pas vous prendre plus de 4 minutes...
+      <p className="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
+        C'est parti! Cela ne devrait pas vous prendre plus de <span className="font-bold">4 minutes</span>...
       </p>
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
         Nous sommes prêts à évaluer votre bien.
       </p>
 
@@ -82,7 +82,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
           type="text"
           name="adress"
           placeholder="Adresse..."
-          className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97] w-full rounded"
+          className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
         />
       </Autocomplete>
       <GoogleMap

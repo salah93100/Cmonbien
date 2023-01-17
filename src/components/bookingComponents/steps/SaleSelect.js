@@ -29,7 +29,7 @@ const SaleSelect = ({
 
   return (
     <div className="space-y-6">
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#f0562325] rounded-md rounded-bl-none">
         Souhaitez-vous vendre votre l'appartement ?
       </p>
 
@@ -38,7 +38,7 @@ const SaleSelect = ({
           return (
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.sellingHouse === sales.value ? 'border-[#075b97]' : ''
+                booking.sellingHouse === sales.value ? 'border-[#f05623]' : ''
               } `}
             >
               <input

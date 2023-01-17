@@ -30,7 +30,7 @@ const FormStepper = ({
           {stepsArray[step]}
           {step < 5 && step !== 2 && step !== 3 ? (
             <button
-              className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+              className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
               onClick={buttonNextStepper}
               disabled={nextStep}
             >
@@ -42,7 +42,7 @@ const FormStepper = ({
 
           {step === 5 && (
             <button
-              className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+              className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
               onClick={handleSubmit(onSubmit)}
             >
               Finaliser et soumettre

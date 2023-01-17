@@ -29,7 +29,7 @@ const VerificationSelect = ({
             },
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
         />
         {errors.email && <p className="text-red-400">{errors.email.message}</p>}
 
@@ -42,7 +42,7 @@ const VerificationSelect = ({
             { required: 'Votre Prénom est requis' },
             { pattern: /^[A-Za-z]+$/i }
           )}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
         />
         {errors.firstName && (
           <p className="text-red-400">{errors.firstName.message}</p>
@@ -56,7 +56,7 @@ const VerificationSelect = ({
             { required: 'Votre Nom est requis' },
             { pattern: /^[A-Za-z]+$/i }
           )}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
         />
         {errors.lastName && (
           <p className="text-red-400"> {errors.lastName.message}</p>

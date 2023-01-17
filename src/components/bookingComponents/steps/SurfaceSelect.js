@@ -115,14 +115,14 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
   }, [stepCompoments]);
   return (
     <div className="space-y-6">
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
         Cette étape est la plus importante!
       </p>
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
         Assurez-vous de répondre soigneusement aux prochaines questions afin
         d'obtenir l'évaluation la plus précise possible.
       </p>
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
         Quelle est la surface habitable de l'appartement? Surface (Carrez) m
       </p>
 
@@ -218,7 +218,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       </div>
       {stepCompoments > 0 ? (
         <>
-          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
             Quelle est l'année de construction de la maison?
           </p>
           <input
@@ -230,7 +230,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             step="1"
             value={booking.yearsBuild}
             onChange={handleInput}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]"
+            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
           />
         </>
       ) : (
@@ -239,13 +239,13 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
 
       {stepCompoments > 1 ? (
         <>
-          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
             Votre bien a il était rénnové
           </p>
           <div className="flex flex-col gap-3">
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.renovated === true ? 'border-[#075b97]' : ''
+                booking.renovated === true ? 'border-[#f05623]' : ''
               }`}
             >
               <input
@@ -262,7 +262,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.renovated === false ? 'border-[#075b97]' : ''
+                booking.renovated === false ? 'border-[#f05623]' : ''
               }`}
             >
               <input
@@ -283,7 +283,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       )}
       {stepCompoments > 1 && booking.renovated === true ? (
         <>
-          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
             Année de rénovation
           </p>
 
@@ -294,7 +294,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             maxLength="4"
             value={booking.yearsRenovated}
             onChange={handleInput}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97]"
+            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
           />
         </>
       ) : (
@@ -343,7 +343,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       )}
 
       <button
-        className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={nextStepper}
         disabled={disabled}
       >

@@ -18,7 +18,7 @@ const NumComfirmation = ({
         <input
           type="tel"
           value={numTel}
-          className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97] w-full rounded"
+          className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
           placeholder="XX XX XX XX XX"
           onChange={e => {
             setNumTel(e.target.value);
@@ -26,7 +26,7 @@ const NumComfirmation = ({
         />
       </div>
       <button
-        className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={() => {
           setOpen(true);
         }}
@@ -38,12 +38,12 @@ const NumComfirmation = ({
           <input
             type="tel"
             value={numTel}
-            className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#075b97] focus:ring-[#075b97] w-full rounded"
+            className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
             placeholder="_ _ _ _"
             onChange={'(e)=>setNumTel(e.target.value)'}
           />
           <button
-            className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => {
               setStep(prev => prev + 1);
             }}

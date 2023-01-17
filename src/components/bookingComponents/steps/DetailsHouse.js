@@ -144,7 +144,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
   return (
     <div className="space-y-6">
       {console.log(stepCompoments)}
-      <p class="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+      <p class="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
         Type {booking.houseOptions === 'House' ? 'de Maison' : "d'Appartement"}
       </p>
 
@@ -154,7 +154,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
             radio.type === booking.houseOptions && (
               <label
                 className={`border w-full text-left  px-8 py-4 rounded ${
-                  booking.houseType === radio.value ? 'border-[#075b97]' : ''
+                  booking.houseType === radio.value ? 'border-[#f05623]' : ''
                 } `}
               >
                 <input
@@ -178,14 +178,14 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
           {booking.houseOptions === 'Appartement' &&
           booking.houseType.length > 0 ? (
             <>
-              <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+              <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
                 A quel étage se trouve l'appartement ?
               </p>
 
               <label>Nombre d’étages de l’Appartement</label>
               <div className="rounded-l inline-flex">
                 <button
-                  className="border   px-8 py-4 rounded-l"
+                  className="border px-8 py-4 rounded-l"
                   onClick={decreaseCounterAppart}
                 >
                   -
@@ -242,7 +242,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
             stepCompoments > 0 && (
               <label
                 className={`border w-full text-left  px-8 py-4 rounded ${
-                  booking[extra.name] === true ? 'border-[#075b97]' : ''
+                  booking[extra.name] === true ? 'border-[#f05623]' : ''
                 }`}
               >
                 <input
@@ -262,16 +262,16 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
 
         {stepCompoments > 1 ? (
           <>
-            <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+            <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
               Super! Nous sommes presque prêts à évaluer votre maison
             </p>
-            <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+            <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
               Êtes-vous le propriétaire de ce bien?
             </p>
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-                booking.owner === 'Propriétaire' ? 'border-[#075b97]' : ''
+                booking.owner === 'Propriétaire' ? 'border-[#f05623]' : ''
               }`}
             >
               <input
@@ -287,7 +287,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
             </label>
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-                booking.owner === 'Locataire' ? 'border-[#075b97]' : ''
+                booking.owner === 'Locataire' ? 'border-[#f05623]' : ''
               }`}
             >
               <input
@@ -307,7 +307,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
         )}
       </div>
       <button
-        className="px-8 py-4 bg-[#075b97] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={nextStepper}
         disabled={disabled}
       >

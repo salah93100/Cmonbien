@@ -21,7 +21,7 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep }) => {
   }, [booking]);
   return (
     <div className="space-y-6">
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none ">
+      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none ">
         Quel type de bien souhaitez-vous évaluer ?
       </p>
       <div className="flex flex-col gap-3">
@@ -31,7 +31,7 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep }) => {
           name="house"
           value="House"
           className={`border gap-2 w-full text-left  px-8 py-4 rounded items-center flex ${
-            selected === 'house' ? 'border-[#075b97]' : ''
+            selected === 'house' ? 'border-[#f05623]' : ''
           }`}
           onClick={handleClick}
         >
@@ -45,7 +45,7 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep }) => {
           name="appart"
           value="Appartement"
           className={`border gap-2 w-full text-left  px-8 py-4 rounded items-center  flex ${
-            selected === 'appart' ? 'border-[#075b97]' : ''
+            selected === 'appart' ? 'border-[#f05623]' : ''
           }`}
           onClick={handleClick}
         >
