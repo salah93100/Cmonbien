@@ -8,14 +8,14 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
       name: 'houseType',
       value: 'Individual House',
       type: 'House',
-      placeHolder: 'Maison individuel',
+      placeHolder: 'Maison individuelle',
     },
     {
       id: 1,
       name: 'houseType',
       value: 'Group House',
       type: 'House',
-      placeHolder: 'Maison Groupé',
+      placeHolder: 'Maison mitoyenne ou jumelée',
     },
     {
       id: 2,
@@ -182,7 +182,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
                 A quel étage se trouve l'appartement ?
               </p>
 
-              <label>Nombre d’étages de l’Appartement</label>
+              <label>À quel étage est situé l’appartement ?</label>
               <div className="rounded-l inline-flex">
                 <button
                   className="border px-8 py-4 rounded-l"
