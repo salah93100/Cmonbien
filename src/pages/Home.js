@@ -14,7 +14,7 @@ import MessageConfirmation from '../components/bookingComponents/steps/MessageCo
 export default function Home() {
 const { register, handleSubmit, formState: { errors } } = useForm();
 
- const [step, setStep] = useState(6);
+ const [step, setStep] = useState(0);
  
  const [nextStep, setNextStep] = useState(true);
  const [booking, setBooking] = useState({
