@@ -20,7 +20,6 @@ export default function Home() {
 
 
   const [step, setStep] = useState(0);
-
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
     adress: '',

@@ -48,6 +48,8 @@ const FormStepper = ({
               Finaliser et soumettre
             </button>
           )}
+        <button className='px-8 py-4 bg-slate-700 text-white rounded w-full' onClick={()=>setStep(prev=>prev-1)}>Précedent</button>
+
         </form>
       </BookingUI>
     </>
