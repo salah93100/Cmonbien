@@ -19,7 +19,7 @@ export default function Home() {
   } = useForm();
 
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
     adress: '',
@@ -27,10 +27,13 @@ export default function Home() {
     houseType: '',
     stageApart: {},
     owner: '',
-    surface: {},
+    surface: {Surface:0,
+      SurTerrain:0,
+      SurfaceBalcon:0
+    },
     yearsBuild: 1900,
     yearsRenovated: 1900,
-    renovated: false,
+    renovated: null,
     nombreRoom: {},
     sellingHouse: '',
   });
@@ -49,7 +52,7 @@ export default function Home() {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
       >
-        {console.log(errors)}
+        {console.log(booking)}
         <AdresseSelect
           setBooking={setBooking}
           booking={booking}

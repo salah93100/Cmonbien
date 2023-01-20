@@ -94,7 +94,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
         setDisabled(false);
       }
     } else {
-      console.log('sa passe');
+     
       setBooking({ ...booking, [name]: JSON.parse(value) });
       setDisabled(false);
     }
@@ -108,6 +108,14 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       setDisabled(true);
     }
   };
+  
+  const handleChangeInput = e => {
+    const { name, value } = e.target;
+    setBooking({...booking,surface:{...booking.surface,[name]:parseInt(value)}});
+    setCounterSuface({...counterSuface,[name]:parseInt(value)})
+  };
+
+
   useEffect(() => {
     if (stepCompoments > 0) {
       window.scrollTo(0, document.body.scrollHeight);
@@ -142,7 +150,8 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             type="tel"
             id="house"
             name="Surface"
-            value={counterSuface.Surface}
+            onChange={handleChangeInput}
+            value={booking.surface.Surface}
             className="inline-flex  px-8 py-4 border text-center w-full"
           />
 
@@ -172,7 +181,9 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             type="tel"
             id="house"
             name="SurfaceBalcon"
-            value={counterSuface.SurfaceBalcon}
+            onChange={handleChangeInput}
+
+            value={booking.surface.SurfaceBalcon}
             className="inline-flex border px-8 py-4  text-center w-full"
           />
 
@@ -202,8 +213,10 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             type="tel"
             id="house"
             name="SurTerrain"
-            value={counterSuface.SurTerrain}
+            onChange={handleChangeInput}
             className="inline-flex border px-8 py-4  text-center w-full"
+            value={booking.surface.SurTerrain}
+
           />
 
           <button
@@ -240,7 +253,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       {stepCompoments > 1 ? (
         <>
           <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
-            Votre bien a il était rénnové
+          Votre bien a-t-il été rénové ?
           </p>
           <div className="flex flex-col gap-3">
             <label
@@ -257,7 +270,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
                 onChange={handleInput}
                 checked={booking.renovated === true}
               />
-              OUI
+              Oui
             </label>
 
             <label
