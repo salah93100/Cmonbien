@@ -6,6 +6,9 @@ const SaleSelect = ({
   setBooking,
   nextStep,
   setNextStep,
+  register,
+  watch,
+  isValid
 }) => {
   const ArraySales = [
     { id: 0, value: 'Oui, dès que possible' },
@@ -22,10 +25,10 @@ const SaleSelect = ({
   };
 
   useEffect(() => {
-    if (booking.sellingHouse.length > 0) {
+    if (!isValid) {
       setNextStep(false);
     }
-  }, [booking]);
+  }, [isValid]);
 
   return (
     <div className="space-y-6">
@@ -34,21 +37,20 @@ const SaleSelect = ({
       </p>
 
       <div className="flex flex-col gap-3">
+        {console.log(isValid+"--------")}
         {ArraySales.map(sales => {
           return (
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.sellingHouse === sales.value ? 'border-[#f05623]' : ''
+                watch('sellingHouse') === sales.value ? 'border-[#f05623]' : ''
               } `}
             >
               <input
                 type="radio"
                 id="house"
-                name="sellingHouse"
+                {...register('sellingHouse',{required:"choice value"})}
                 value={sales.value}
                 className="mr-2"
-                onChange={handleInput}
-                checked={booking.sellingHouse === sales.value}
               />
               {sales.value}
             </label>

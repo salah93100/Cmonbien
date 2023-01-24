@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm,Controller } from 'react-hook-form';
 import FormStepper from '../components/bookingComponents/steps/FormStepper';
 import AdresseSelect from '../components/bookingComponents/steps/AdresseSelect';
 import HouseSelect from '../components/bookingComponents/steps/HouseSelect';
@@ -15,11 +15,20 @@ export default function Home() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    watch,
+    setError,
+    setValue,
+    control,
+    formState: { errors,isValid },
+  } = useForm({mode:"all", defaultValues: {
+    adress: '',
+    houseOptions: '',
+  
+  }}
+ );
 
 
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
     adress: '',
@@ -27,7 +36,8 @@ export default function Home() {
     houseType: '',
     stageApart: {},
     owner: '',
-    surface: {Surface:0,
+    surface:
+    {Surface:0,
       SurTerrain:0,
       SurfaceBalcon:0
     },
@@ -39,7 +49,7 @@ export default function Home() {
   });
   const onSubmit = data => {
     console.log(data);
-    setStep(prev => prev + 1);
+  //  setStep(prev => prev + 1);
   };
 
   return (
@@ -51,23 +61,43 @@ export default function Home() {
         setNextStep={setNextStep}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
+        isValid={isValid}
+        watch={watch}
       >
-        {console.log(booking)}
         <AdresseSelect
           setBooking={setBooking}
           booking={booking}
           nextStep={nextStep}
           setNextStep={setNextStep}
+          register={register}
+          errors={errors}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          isValid={isValid}
+          required
         />
         <HouseSelect
           setBooking={setBooking}
           booking={booking}
           setNextStep={setNextStep}
+          register={register}
+          errors={errors}
+          watch={watch}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          
+          required
         />
         <DetailsHouse
           setBooking={setBooking}
           booking={booking}
           setStep={setStep}
+          register={register}
+          watch={watch}
+          errors={errors}
+          setValue={setValue}
+          setError={setError}
+          isValid={isValid}
         />
         <SurfaceSelect
           setBooking={setBooking}
@@ -75,12 +105,21 @@ export default function Home() {
           setStep={setStep}
           nextStep={nextStep}
           setNextStep={setNextStep}
-        />
+          register={register}
+          watch={watch}
+          errors={errors}
+          setValue={setValue}
+          setError={setError}
+          isValid={isValid}        />
         <SaleSelect
           setBooking={setBooking}
           booking={booking}
           nextStep={nextStep}
           setNextStep={setNextStep}
+          isValid={isValid}
+          register={register}
+          errors={errors}
+          watch={watch}
         />
         <VerificationSelect
           setBooking={setBooking}
@@ -89,10 +128,19 @@ export default function Home() {
           setNextStep={setNextStep}
           register={register}
           errors={errors}
+          isValid={isValid}
           required
         />
-        <NumComfirmation setStep={setStep} />
-        <MessageConfirmation />
+        <NumComfirmation 
+        setStep={setStep} 
+        isValid={isValid} 
+        Controller={Controller}
+        control={control}
+        setValue={setValue}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}/>
+        <MessageConfirmation 
+        isValid={isValid}/>
       </FormStepper>
     </>
   );

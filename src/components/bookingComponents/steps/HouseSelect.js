@@ -5,53 +5,63 @@ import { FaBuilding } from 'react-icons/fa';
 
 import { Icon } from '@chakra-ui/react';
 
-const HouseSelect = ({ children, booking, setBooking, setNextStep }) => {
+const HouseSelect = ({ children, booking, setBooking, setNextStep ,register,errors,watch}) => {
   const [selected, setSelected] = useState(false);
 
   const handleClick = e => {
     const { id, value } = e.target;
     setSelected(id);
     setBooking({ ...booking, houseOptions: value });
-    console.log(value);
+
   };
   useEffect(() => {
-    if (booking.houseOptions.length > 0) {
+    if (watch('houseOptions')) {
       setNextStep(false);
     }
-  }, [booking]);
+  }, [watch('houseOptions')]);
   return (
     <div className="space-y-6">
-      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none ">
+      <p className={`px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none`}>
         Quel type de bien souhaitez-vous évaluer ?
       </p>
       <div className="flex flex-col gap-3">
-        <button
-          type="button"
+        <label className={`border w-full text-left  px-8 py-4 rounded ${watch('houseOptions')==="House"?'border-[#075b97] ':''}`}>
+      
+        <input
+          type="radio"
+          {...register(
+            'houseOptions',  
+            { required: 'choisir type' },
+          )}
           id="house"
-          name="house"
           value="House"
-          className={`border gap-2 w-full text-left  px-8 py-4 rounded items-center flex ${
-            selected === 'house' ? 'border-[#f05623]' : ''
-          }`}
+          className={`mr-2 `}
           onClick={handleClick}
-        >
-          <Icon as={MdHouse} w={6} h={6} />
+          />
+            <Icon as={MdHouse} w={6} h={6} />
           Maison
-        </button>
-
-        <button
-          type="button"
+          </label>
+          
+        
+       
+        <label className={`border w-full text-left  px-8 py-4 rounded ${watch('houseOptions')==="Appartement"?'border-[#075b97] ':''}`}>
+      
+        <input
+          type="radio"
           id="appart"
-          name="appart"
+          {...register(
+            'houseOptions',  
+            { required: 'choisir type' },
+          )}
           value="Appartement"
-          className={`border gap-2 w-full text-left  px-8 py-4 rounded items-center  flex ${
+          className={`mr-2 checked:bg-blue-500${
             selected === 'appart' ? 'border-[#f05623]' : ''
           }`}
           onClick={handleClick}
-        >
+          />
           <Icon as={FaBuilding} w={6} h={6} />
           Appartement
-        </button>
+          </label>
       </div>
     </div>
   );

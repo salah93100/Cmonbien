@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import CounterStep from '../CounterStep';
 
-const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
+const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid}) => {
   const [disabled, setDisabled] = useState(true);
 
   const [counterArrayRoom, setCounterArrayRoom] = useState({
@@ -16,24 +17,32 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       name: 'numberRoom',
       value: counterArrayRoom.numberRoom,
       placeHolder: 'Nombre de pièces',
+      min:1,
+      max:20
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberBathroom',
       value: counterArrayRoom.numberBathroom,
       placeHolder: 'Nombre de salles de bain',
+      min:1,
+      max:5
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberParkingIn',
       value: counterArrayRoom.numberParkingIn,
       placeHolder: 'Nombre de places de parking couvertes',
+      min:0,
+      max:6
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberParkingOut',
       value: counterArrayRoom.numberParkingOut,
       placeHolder: 'Nombre de places de parking extérieures',
+      min:0,
+      max:6
     },
   ];
 
@@ -46,17 +55,23 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
   });
 
   const increaseCounterAppart = e => {
-    const { name, id } = e.target;
+    const { name, id,value } = e.target;
     if (id === 'ArrayCounterRoomParking') {
+     
       setCounterArrayRoom(prevState => ({
         ...counterArrayRoom,
-        [name]: prevState[name] + 1,
+        [name]:  Number(prevState[name]) + 1,
       }));
       setBooking({ ...booking, nombreRoom: counterArrayRoom });
-    } else {
+
+    }
+     
+    
+    
+    else {
       setCounterSuface(prevState => ({
         ...counterSuface,
-        [name]: prevState[name] + 1,
+        [name]: Number(prevState[name]) + 1,
       }));
       setBooking({ ...booking, surface: counterSuface });
     }
@@ -105,16 +120,23 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       setStep(prev => prev + 1);
     } else {
       setStepCompoments(prev => prev + 1);
-      setDisabled(true);
+      
     }
   };
   
   const handleChangeInput = e => {
-    const { name, value } = e.target;
-    setBooking({...booking,surface:{...booking.surface,[name]:parseInt(value)}});
-    setCounterSuface({...counterSuface,[name]:parseInt(value)})
-  };
+    const { name,value,id } = e.target;
+    
+      
+    if (id === 'ArrayCounterRoomParking') {
+    setBooking({...booking,nombreRoom:{...booking.nombreRoom,[name]:value}});
+    setCounterArrayRoom({...counterArrayRoom,[name]:value})
 
+    }
+    else{
+    setBooking({...booking,surface:{...booking.surface,[name]:value}});
+    setCounterSuface({...counterSuface,[name]:value})}
+  };
 
   useEffect(() => {
     if (stepCompoments > 0) {
@@ -134,117 +156,54 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
         Quelle est la surface habitable de l'appartement? Surface (Carrez) m
       </p>
 
-      <div className="w-full inline-flex flex-col">
-        <label>Surface (Carrez) m²</label>
-        {console.log(counterSuface)}
-        <div className="rounded inline-flex">
-          <button
-            className="border px-8 py-4 rounded-l"
-            id="Surface"
-            name="Surface"
-            onClick={decreaseCounterAppart}
-          >
-            -
-          </button>
-          <input
-            type="tel"
-            id="house"
-            name="Surface"
-            onChange={handleChangeInput}
-            value={booking.surface.Surface}
-            className="inline-flex  px-8 py-4 border text-center w-full"
-          />
+      <div className="w-full inline-flex flex-col gap-2">
+      <CounterStep register={register} setValue={setValue} watch={watch} name={'Surface'} id={'Surface'} label={'Surface (Carrez) m² 1'}
+       array={'counterSuface'} setError={setError} errors={errors} 
+       min={5}
+       max={1000}/>
+      <CounterStep register={register} setValue={setValue} watch={watch} name={'SurfaceBalcon'} id={'SurfaceBalcon'} label={'Surface des balcons m²'} array={'counterSuface'} setError={setError} errors={errors} min={200}
+       max={500}/>
+      <CounterStep register={register} setValue={setValue} watch={watch} name={'SurfaceTerrain'} id={'SurfaceTerrain'} label={'Surface du terrain m²'} array={'counterSuface'} setError={setError} errors={errors} min={10}
+       max={100000}/>
 
-          <button
-            className="border   px-8 py-4 rounded-r"
-            id="Surface"
-            name="Surface"
-            onClick={increaseCounterAppart}
-          >
-            +
-          </button>
-        </div>
+       
+    
       </div>
 
-      <div className="w-full inline-flex flex-col">
-        <label>Surface des balcons m²</label>
-        <div className="rounded inline-flex">
-          <button
-            className="border   px-8 py-4 rounded-l"
-            id="SurfaceBalcon"
-            name="SurfaceBalcon"
-            onClick={decreaseCounterAppart}
-          >
-            -
-          </button>
-          <input
-            type="tel"
-            id="house"
-            name="SurfaceBalcon"
-            onChange={handleChangeInput}
-
-            value={booking.surface.SurfaceBalcon}
-            className="inline-flex border px-8 py-4  text-center w-full"
-          />
-
-          <button
-            className="border   px-8 py-4 rounded-r"
-            id="SurfaceBalcon"
-            name="SurfaceBalcon"
-            onClick={increaseCounterAppart}
-          >
-            +
-          </button>
-        </div>
-      </div>
-
-      <div className="w-full inline-flex flex-col">
-        <label>Surface du terrain</label>
-        <div className="rounded inline-flex">
-          <button
-            className="border px-8 py-4 rounded-l"
-            id="SurTerrain"
-            name="SurTerrain"
-            onClick={decreaseCounterAppart}
-          >
-            -
-          </button>
-          <input
-            type="tel"
-            id="house"
-            name="SurTerrain"
-            onChange={handleChangeInput}
-            className="inline-flex border px-8 py-4  text-center w-full"
-            value={booking.surface.SurTerrain}
-
-          />
-
-          <button
-            className="border   px-8 py-4 rounded-r"
-            id="SurTerrain"
-            name="SurTerrain"
-            onClick={increaseCounterAppart}
-          >
-            +
-          </button>
-        </div>
-      </div>
+     
+ 
       {stepCompoments > 0 ? (
         <>
           <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
             Quelle est l'année de construction de la maison?
           </p>
+          <div className='flex inline-flex	flex-col	w-full gap-2'>
+          <label for="yearsBuild">Année de construction</label>
           <input
-            id="dateBuild"
-            name="yearsBuild"
+            
             type="number"
-            min="1900"
-            max="2022"
-            step="1"
-            value={booking.yearsBuild}
-            onChange={handleInput}
+            {...register("yearsBuild", 
+            {required:'La valeur ne peu être nulle' ,
+            maxLength : {
+              value: 4,
+              message: 'date au format YYYY' // JS only: <p>error message</p> TS only support string
+            },
+            max: {
+              value:2025,
+              message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025` // JS only: <p>error message</p> TS only support string
+            },
+            min: {
+              value:1700 ,
+              message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700` // JS only: <p>error message</p> TS only support string
+            }
+          })}
+          value={watch("yearsBuild")}
             className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
           />
+          {errors.yearsBuild && <p className="text-red-600 ">{errors.yearsBuild.message}</p>}
+          </div>
+
+
         </>
       ) : (
         ''
@@ -258,34 +217,33 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
           <div className="flex flex-col gap-3">
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.renovated === true ? 'border-[#f05623]' : ''
+                watch("renovated")=== "true" ? 'border-[#f05623]' : ''
               }`}
             >
               <input
                 type="radio"
-                id="house"
-                name="renovated"
+                
+                {...register("renovated",{required:"choisire une option"})}
                 value={true}
                 className="mr-2"
-                onChange={handleInput}
-                checked={booking.renovated === true}
+           
               />
               Oui
             </label>
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                booking.renovated === false ? 'border-[#f05623]' : ''
+              watch("renovated") === "false" ? 'border-[#f05623]' : ''
               }`}
             >
               <input
                 type="radio"
-                id="house"
-                name="renovated"
+              
+                
+                {...register("renovated",{required:"choisire une option"})}
                 value={false}
                 className="mr-2"
-                onChange={handleInput}
-                checked={booking.renovated === false}
+           
               />
               Non
             </label>
@@ -294,21 +252,40 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       ) : (
         ''
       )}
-      {stepCompoments > 1 && booking.renovated === true ? (
+      {stepCompoments > 1 &&  watch("renovated") === "true" ? (
         <>
           <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
             Année de rénovation
           </p>
+          <div className='flex inline-flex	flex-col	w-full gap-2'>
+          <label for="yearsRenovated">Année de rénovation</label>
 
           <input
-            id="dateBuild"
-            name="yearsRenovated"
+           
             type="number"
-            maxLength="4"
-            value={booking.yearsRenovated}
-            onChange={handleInput}
+            {...register("yearsRenovated", 
+            {required:'La valeur ne peu être nulle' ,
+            maxLength : {
+              value: 4,
+              message: 'date au format YYYY' // JS only: <p>error message</p> TS only support string
+            },
+            max: {
+              value:2025,
+              message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025` // JS only: <p>error message</p> TS only support string
+            },
+            min: {
+              value:1700 ,
+              message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700` // JS only: <p>error message</p> TS only support string
+            }
+          })}
+          
+                 value={watch("yearsRenovated")}
             className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
           />
+
+{errors.yearsRenovated && <p className="text-red-600 ">{errors.yearsRenovated.message}</p>}
+</div>
+
         </>
       ) : (
         ''
@@ -319,33 +296,21 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
             {ArrayCounterRoomParking.map(counter => {
               return (
                 <>
-                  <label>{counter.placeHolder}</label>
-                  <div className="rounded inline-flex">
-                    <button
-                      className="border   px-8 py-4 rounded-l"
-                      name={counter.name}
-                      id={counter.id}
-                      onClick={decreaseCounterAppart}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="tel"
-                      id="house"
-                      name="house"
-                      value={counter.value}
-                      className="inline-flex border px-8 py-4  text-center w-full"
-                    />
+                      <CounterStep 
+                         register={register} 
+                         setValue={setValue} 
+                         watch={watch} 
+                         name={counter.name} 
+                         id={counter.id}
+                         label={counter.placeHolder}
+                         array={'counterArrayRoom'} 
+                         setError={setError} 
+                         errors={errors}
+                         min={counter.min}
+                         max={counter.max}
+                         />
 
-                    <button
-                      className="border   px-8 py-4 rounded-r"
-                      name={counter.name}
-                      id={counter.id}
-                      onClick={increaseCounterAppart}
-                    >
-                      +
-                    </button>
-                  </div>
+               
                 </>
               );
             })}
@@ -358,8 +323,9 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep }) => {
       <button
         className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={nextStepper}
-        disabled={disabled}
+        disabled={!isValid}
       >
+        {console.log(errors)}
         Continuer{' '}
       </button>
     </div>

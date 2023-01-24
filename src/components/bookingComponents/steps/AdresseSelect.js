@@ -8,10 +8,10 @@ import {
 } from '@react-google-maps/api';
 import { SkeletonText, Stack, Skeleton } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
-import { Formatrelative } from 'date-fns';
+import { Formatrelative, isValid } from 'date-fns';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 
-const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
+const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,errors }) => {
   useEffect(() => {
     if (booking.adress.length > 0) {
       setNextStep(false);
@@ -39,6 +39,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
         address: place.formatted_address,
       };
       setBooking({ ...booking, adress: formattedAddress.address });
+
       getGeocode(formattedAddress).then(results => {
         const { lat, lng } = getLatLng(results[0]);
         setMarkerLocation({ lat: lat, lng: lng });
@@ -74,10 +75,18 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep }) => {
         <input
           type="text"
           name="adress"
+          {...register(
+            'adress',
+            { required: 'Veuillez entrez votre adresse' },
+            { pattern: /^[A-Za-z]+$/i }
+          )}
           placeholder="Adresse..."
           className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
         />
       </Autocomplete>
+      {errors.adress && (
+          <p className="text-red-400">{errors.adress.message}</p>
+        )}
       <GoogleMap
         mapContainerStyle={{
             width: '100%',

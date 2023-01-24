@@ -17,7 +17,6 @@ const VerificationSelect = ({
     <div className="space-y-6">
       <h1 className="text-4xl text-center">Verification</h1>
       <div className="flex flex-col gap-3">
-        {console.log(errors)}
         <input
           type="text"
           placeholder="Email"

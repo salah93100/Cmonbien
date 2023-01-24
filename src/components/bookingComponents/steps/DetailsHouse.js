@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import CounterStep from '../CounterStep';
 
-const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
+const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,watch,setValue,setError,isValid}) => {
   const radioArray = [
     {
       id: 0,
@@ -73,12 +74,9 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
   const [checked, setChecked] = useState(0);
   const [stepCompoments, setStepCompoments] = useState(0);
   const [checkedExtra, setCheckedExtra] = useState(0);
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
 
-  const [stageApart, setStageApart] = useState({
-    stageHouse: 0,
-    stageBuilding: 0,
-  });
+  const [stageApart, setStageApart] = useState(watch('stageApart'));
   useEffect(() => {
     setBooking({ ...booking, stageApart: stageApart });
   }, [stageApart]);
@@ -90,60 +88,25 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
 
   const nextStepper = () => {
     if (stepCompoments !== 0) {
-      setDisabled(true);
+    
     }
     if (stepCompoments === 2) {
-      console.log('SetnextStep');
       setStep(prev => prev + 1);
     } else {
       setStepCompoments(prev => prev + 1);
     }
   };
-  const handleInputChange = e => {
-    setDisabled(false);
-    const { id, name, type } = e.target;
-    const value = type === 'checkbox' ? e.target.checked : e.target.value;
 
-    if (type === 'checkbox') {
-      setCheckedExtra(parseInt(id));
-      setBooking({ ...booking, [name]: value });
-    } else {
-      setChecked(parseInt(id));
-      setBooking({ ...booking, [name]: value });
-    }
-  };
 
-  const increaseCounterAppart = e => {
-    const { id, value } = e.target;
-    if (id === 'Building') {
-      setStageApart({ ...stageApart, stageHouse: stageApart.stageHouse + 1 });
-    } else {
-      setStageApart({
-        ...stageApart,
-        stageBuilding: stageApart.stageBuilding + 1,
-      });
-    }
-    setDisabled(false);
-  };
-  const decreaseCounterAppart = e => {
-    const { id, value } = e.target;
-    if (id === 'Building') {
-      if (stageApart.stageHouse > 0) {
-        setStageApart({ ...stageApart, stageHouse: stageApart.stageHouse - 1 });
-      }
-    } else {
-      if (stageApart.stageBuilding > 0) {
-        setStageApart({
-          ...stageApart,
-          stageBuilding: stageApart.stageBuilding - 1,
-        });
-      }
-    }
-  };
+
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <div className="space-y-6">
-      {console.log(stepCompoments)}
+      {console.log(isValid)}
       <p class="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
         Type {booking.houseOptions === 'House' ? 'de Maison' : "d'Appartement"}
       </p>
@@ -160,11 +123,13 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
                 <input
                   type="radio"
                   id={radio.id}
-                  name={radio.name}
+                  {...register(
+                    radio.name,
+                    { required: 'Choisir option Type' }
+                  )}
                   value={radio.value}
                   className="mr-2 checked:bg-blue-500 "
-                  onChange={handleInputChange}
-                  checked={booking.houseType === radio.value}
+                 
                 />
 
                 {checked === radio.id}
@@ -174,63 +139,16 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
           );
         })}
 
-        <div className="w-full inline-flex flex-col">
-          {booking.houseOptions === 'Appartement' &&
-          booking.houseType.length > 0 ? (
+        <div className="w-full inline-flex flex-col gap-2">
+       
+          {watch('houseOptions') === 'Appartement' &&
+          watch('houseType') ? (
             <>
-              <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+             <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
                 A quel étage se trouve l'appartement ?
               </p>
-
-              <label>À quel étage est situé l’appartement ?</label>
-              <div className="rounded-l inline-flex">
-                <button
-                  className="border px-8 py-4 rounded-l"
-                  onClick={decreaseCounterAppart}
-                >
-                  -
-                </button>
-                <input
-                  type="tel"
-                  id="house"
-                  name="house"
-                  value={stageApart.stageBuilding}
-                  className="inline-flex border px-8 py-4 outline-none text-center w-full"
-                />
-
-                <button
-                  className="border   px-8 py-4 rounded-r"
-                  id="Appart"
-                  onClick={increaseCounterAppart}
-                >
-                  +
-                </button>
-              </div>
-              <label>Nombre d’étages de l’immeuble</label>
-              <div className="rounded inline-flex">
-                <button
-                  className="border   px-8 py-4 rounded-l"
-                  id="Building"
-                  onClick={decreaseCounterAppart}
-                >
-                  -
-                </button>
-                <input
-                  type="tel"
-                  id="house"
-                  name="house"
-                  value={stageApart.stageHouse}
-                  className="inline-flex border px-8 py-4  text-center w-full outline-none"
-                />
-
-                <button
-                  className="border   px-8 py-4 rounded-r"
-                  id="Building"
-                  onClick={increaseCounterAppart}
-                >
-                  +
-                </button>
-              </div>
+              <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepAppartment'} id={'Appart'} label={'À quel étage est situé l’appartement ?'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50}/>
+              <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepBuilding'} id={'Building'} label={'Nombre d’étages de l’immeuble'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50}/>
             </>
           ) : (
             ''
@@ -242,17 +160,16 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
             stepCompoments > 0 && (
               <label
                 className={`border w-full text-left  px-8 py-4 rounded ${
-                  booking[extra.name] === true ? 'border-[#f05623]' : ''
+                  watch(`extra.${extra.name}`)=== true ? 'border-[#f05623]' : ''
                 }`}
               >
                 <input
                   type="checkbox"
                   id={extra.id}
-                  name={extra.name}
-                  value={extra.value}
+                  {...register(`extra.${extra.name}`)}
+                  
                   className="mr-2"
-                  onChange={handleInputChange}
-                  checked={booking[extra.name] === true}
+             
                 />
                 {extra.placeHolder}
               </label>
@@ -271,33 +188,32 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-                booking.owner === 'Propriétaire' ? 'border-[#f05623]' : ''
+                watch('owner') === 'Propriétaire' ? 'border-[#f05623]' : ''
               }`}
             >
               <input
                 type="radio"
                 id="house"
-                name="owner"
+                {...register("owner" ,{ required: 'Erreur choisir un type de propriéter' })}
+  
                 value="Propriétaire"
                 className="mr-2"
-                onChange={handleInputChange}
-                checked={booking.owner === 'Propriétaire'}
+             
               />
               Propriétaire
             </label>
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-                booking.owner === 'Locataire' ? 'border-[#f05623]' : ''
+               watch('owner') === 'Locataire' ? 'border-[#f05623]' : ''
               }`}
             >
               <input
                 type="radio"
                 id="house"
-                name="owner"
+                {...register("owner" ,{ required: 'Erreur choisir un type de propriéter' })}
                 value="Locataire"
                 className="mr-2"
-                onChange={handleInputChange}
-                checked={booking.owner === 'Locataire'}
+              
               />
               Locataire
             </label>
@@ -306,10 +222,11 @@ const DetailsHouse = ({ children, booking, setBooking, setStep }) => {
           ''
         )}
       </div>
+     
       <button
         className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={nextStepper}
-        disabled={disabled}
+        disabled={!isValid}
       >
         Continuer{' '}
       </button>
