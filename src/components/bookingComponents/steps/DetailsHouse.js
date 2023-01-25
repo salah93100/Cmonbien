@@ -115,7 +115,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
      whileInView={{y:0}}
      viewport={{once:true}}
     >
-      <p class="px-8 py-4 bg-[#005c7c]  rounded-md rounded-bl-none text-white">
+      <p class="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
         Type {booking.houseOptions === 'House' ? 'de Maison' : "d'Appartement"}
       </p>
       </motion.div>
@@ -166,7 +166,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
           {watch('houseOptions') === 'Appartement' &&
           watch('houseType') ? (
             <>
-             <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+             <p className="px-8 py-4 bg-[#075b9725]rounded-md rounded-bl-none">
                 A quel étage se trouve l'appartement ?
               </p>
               <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepAppartment'} id={'Appart'} label={'À quel étage est situé l’appartement ?'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50}/>
@@ -214,7 +214,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                whileInView={{y:0}}
                viewport={{once:true}}
               className="w-full inline-flex flex-col gap-2">
-            <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+            <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
               Super! Nous sommes presque prêts à évaluer votre maison
             </p>
             </motion.div>
@@ -224,7 +224,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
               transition={{duration:0.5}}
                whileInView={{y:0}}>
                 
-            <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+            <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
               Êtes-vous le propriétaire de ce bien?
             </p>
             </motion.div>

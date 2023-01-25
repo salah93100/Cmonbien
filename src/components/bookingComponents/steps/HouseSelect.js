@@ -26,7 +26,7 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep ,register,erro
     transition={{duration:0.3}}
      whileInView={{y:0}}
     >
-      <p className={`px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none`}>
+      <p className={`px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none`}>
         Quel type de bien souhaitez-vous évaluer ?
       </p>
       </motion.div>

@@ -151,7 +151,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
               transition={{duration:0.3}}
                whileInView={{y:0}}
                viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
         Cette étape est la plus importante!
       </p>
       </motion.div>
@@ -160,7 +160,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
               transition={{duration:0.5}}
                whileInView={{y:0}}
                viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
         Assurez-vous de répondre soigneusement aux prochaines questions afin
         d'obtenir l'évaluation la plus précise possible.
       </p>
@@ -170,7 +170,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
               transition={{duration:0.7}}
                whileInView={{y:0}}
                viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
         Quelle est la surface habitable de l'appartement? Surface (Carrez) m
       </p>
       </motion.div>
@@ -204,7 +204,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                whileInView={{y:0}}
                viewport={{once:true}}
               >
-          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
             Quelle est l'année de construction de la maison?
           </p>
           </motion.div>
@@ -257,7 +257,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                viewport={{once:true}}
               
               >
-          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
           Votre bien a-t-il été rénové ?
           </p>
           </motion.div>
@@ -315,7 +315,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                viewport={{once:true}}
               
               >
-          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
+          <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
             Année de rénovation
           </p>
 

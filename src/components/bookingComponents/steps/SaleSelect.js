@@ -38,7 +38,7 @@ const SaleSelect = ({
                whileInView={{y:0}}
                className="w-full inline-flex flex-col "
             >
-      <p className="px-8 py-4 bg-[#f0562325] rounded-md rounded-bl-none">
+      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
         Souhaitez-vous vendre votre l'appartement ?
       </p>
       </motion.div>

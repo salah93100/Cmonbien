@@ -67,7 +67,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
     transition={{duration:0.3}}
      whileInView={{y:0}}
     >
-      <p className="px-8 py-4 bg-[#005c7c] rounded-md rounded-bl-none text-white">
+      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none ">
         C'est parti! Cela ne devrait pas vous prendre plus de <span className="font-bold">4 minutes</span>...
       </p>
       </motion.div>
@@ -76,7 +76,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
     transition={{duration:0.6}}
      whileInView={{y:0}}
     >
-      <p className="px-8 py-4 bg-[#005c7c] rounded-md rounded-bl-none text-white">
+      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
         Nous sommes prêts à évaluer votre bien.
       </p>
       </motion.div>
