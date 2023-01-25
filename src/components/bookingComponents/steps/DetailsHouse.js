@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import CounterStep from '../CounterStep';
+import { motion } from 'framer-motion';
 
 const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,watch,setValue,setError,isValid}) => {
   const radioArray = [
@@ -92,6 +93,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
     }
     if (stepCompoments === 2) {
       setStep(prev => prev + 1);
+      window.scrollTo({top:0});
     } else {
       setStepCompoments(prev => prev + 1);
     }
@@ -105,19 +107,34 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
   },[])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 flex flex-col gap-1">
       {console.log(isValid)}
-      <p class="px-8 py-4 bg-[#f05623]  rounded-md rounded-bl-none text-white">
+      <motion.div
+    initial={{y:100}} 
+    transition={{duration:0.3}}
+     whileInView={{y:0}}
+     viewport={{once:true}}
+    >
+      <p class="px-8 py-4 bg-[#005c7c]  rounded-md rounded-bl-none text-white">
         Type {booking.houseOptions === 'House' ? 'de Maison' : "d'Appartement"}
       </p>
+      </motion.div>
 
       <div className="flex flex-col gap-3">
+      
         {radioArray.map(radio => {
           return (
             radio.type === booking.houseOptions && (
+              <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.5}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+               className="flex flex-col "
+              >
               <label
                 className={`border w-full text-left  px-8 py-4 rounded ${
-                  booking.houseType === radio.value ? 'border-[#f05623]' : ''
+                watch('houseType') === radio.value ? 'border-[#005c7c]' : ''
                 } `}
               >
                 <input
@@ -132,19 +149,24 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                  
                 />
 
-                {checked === radio.id}
                 {radio.placeHolder}
               </label>
+              </motion.div>   
             )
           );
         })}
 
-        <div className="w-full inline-flex flex-col gap-2">
+        <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.4}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              className="w-full inline-flex flex-col gap-2">
        
           {watch('houseOptions') === 'Appartement' &&
           watch('houseType') ? (
             <>
-             <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+             <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
                 A quel étage se trouve l'appartement ?
               </p>
               <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepAppartment'} id={'Appart'} label={'À quel étage est situé l’appartement ?'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50}/>
@@ -153,14 +175,20 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
           ) : (
             ''
           )}
-        </div>
+       </motion.div>
         {CheckExtraArray.map(extra => {
           return (
             (extra.type === booking.houseOptions || extra.type === 'All') &&
             stepCompoments > 0 && (
+              <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.4}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              className="w-full inline-flex flex-col gap-2">
               <label
                 className={`border w-full text-left  px-8 py-4 rounded ${
-                  watch(`extra.${extra.name}`)=== true ? 'border-[#f05623]' : ''
+                  watch(`extra.${extra.name}`)=== true ? 'border-[#005c7c]' : ''
                 }`}
               >
                 <input
@@ -173,22 +201,42 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                 />
                 {extra.placeHolder}
               </label>
+              </motion.div>
             )
           );
         })}
 
         {stepCompoments > 1 ? (
           <>
-            <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+           <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              className="w-full inline-flex flex-col gap-2">
+            <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
               Super! Nous sommes presque prêts à évaluer votre maison
             </p>
-            <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+            </motion.div>
+            <motion.div
+              initial={{y:100}} 
+              viewport={{once:true}}
+              transition={{duration:0.5}}
+               whileInView={{y:0}}>
+                
+            <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
               Êtes-vous le propriétaire de ce bien?
             </p>
-
+            </motion.div>
+            <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.6}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+               className="flex flex-col gap-2 md:gap-4">
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-                watch('owner') === 'Propriétaire' ? 'border-[#f05623]' : ''
+                watch('owner') === 'Propriétaire' ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
@@ -204,7 +252,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
             </label>
             <label
               className={`border w-full text-left  px-8 py-4 rounded  ${
-               watch('owner') === 'Locataire' ? 'border-[#f05623]' : ''
+               watch('owner') === 'Locataire' ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
@@ -217,6 +265,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
               />
               Locataire
             </label>
+            </motion.div>
           </>
         ) : (
           ''
@@ -224,7 +273,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
       </div>
      
       <button
-        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${isValid&&"hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]"}  disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed`}
         onClick={nextStepper}
         disabled={!isValid}
       >

@@ -11,6 +11,8 @@ import VerificationSelect from '../components/bookingComponents/steps/Verificati
 import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
 import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
 
+
+
 export default function Home() {
   const {
     register,

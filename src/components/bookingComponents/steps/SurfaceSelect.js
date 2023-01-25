@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import CounterStep from '../CounterStep';
+import { motion } from 'framer-motion';
 
 const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid}) => {
   const [disabled, setDisabled] = useState(true);
@@ -145,18 +146,41 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
   }, [stepCompoments]);
   return (
     <div className="space-y-6">
-      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+        <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}>
+      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
         Cette étape est la plus importante!
       </p>
-      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+      </motion.div>
+      <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.5}}
+               whileInView={{y:0}}
+               viewport={{once:true}}>
+      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
         Assurez-vous de répondre soigneusement aux prochaines questions afin
         d'obtenir l'évaluation la plus précise possible.
       </p>
-      <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+      </motion.div>
+      <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.7}}
+               whileInView={{y:0}}
+               viewport={{once:true}}>
+      <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
         Quelle est la surface habitable de l'appartement? Surface (Carrez) m
       </p>
-
-      <div className="w-full inline-flex flex-col gap-2">
+      </motion.div>
+      <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.8}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+               className="w-full inline-flex flex-col gap-2">
+     
       <CounterStep register={register} setValue={setValue} watch={watch} name={'Surface'} id={'Surface'} label={'Surface (Carrez) m² 1'}
        array={'counterSuface'} setError={setError} errors={errors} 
        min={5}
@@ -168,16 +192,31 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
 
        
     
-      </div>
+</motion.div>
 
      
  
       {stepCompoments > 0 ? (
         <>
-          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+        <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              >
+          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
             Quelle est l'année de construction de la maison?
           </p>
-          <div className='flex inline-flex	flex-col	w-full gap-2'>
+          </motion.div>
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.6}}
+               whileInView={{y:0}
+              }
+              viewport={{once:true}}
+               className='flex inline-flex	flex-col	w-full gap-2'
+              >
+      
           <label for="yearsBuild">Année de construction</label>
           <input
             
@@ -198,12 +237,12 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
             }
           })}
           value={watch("yearsBuild")}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
+            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
           />
           {errors.yearsBuild && <p className="text-red-600 ">{errors.yearsBuild.message}</p>}
-          </div>
 
 
+        </motion.div>
         </>
       ) : (
         ''
@@ -211,13 +250,28 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
 
       {stepCompoments > 1 ? (
         <>
-          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              
+              >
+          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
           Votre bien a-t-il été rénové ?
           </p>
-          <div className="flex flex-col gap-3">
+          </motion.div>
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.6}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+               className="flex flex-col gap-3"
+              >
+      
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                watch("renovated")=== "true" ? 'border-[#f05623]' : ''
+                watch("renovated")=== "true" ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
@@ -233,7 +287,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-              watch("renovated") === "false" ? 'border-[#f05623]' : ''
+              watch("renovated") === "false" ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
@@ -247,17 +301,33 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
               />
               Non
             </label>
-          </div>
+            </motion.div>
         </>
       ) : (
         ''
       )}
       {stepCompoments > 1 &&  watch("renovated") === "true" ? (
         <>
-          <p className="px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none">
+           <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+              
+              >
+          <p className="px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none">
             Année de rénovation
           </p>
-          <div className='flex inline-flex	flex-col	w-full gap-2'>
+
+          </motion.div>
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               viewport={{once:true}}
+               className='flex 	flex-col	w-full gap-2'
+            >
+
           <label for="yearsRenovated">Année de rénovation</label>
 
           <input
@@ -280,11 +350,11 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
           })}
           
                  value={watch("yearsRenovated")}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
+            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
           />
 
 {errors.yearsRenovated && <p className="text-red-600 ">{errors.yearsRenovated.message}</p>}
-</div>
+</motion.div>
 
         </>
       ) : (
@@ -292,10 +362,18 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       )}
       {stepCompoments > 2 ? (
         <>
-          <div className="w-full inline-flex flex-col gap-2">
+         
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               className="w-full inline-flex flex-col "
+               viewport={{once:true}}
+            >
             {ArrayCounterRoomParking.map(counter => {
               return (
                 <>
+               
                       <CounterStep 
                          register={register} 
                          setValue={setValue} 
@@ -310,18 +388,19 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                          max={counter.max}
                          />
 
-               
+         
                 </>
               );
             })}
-          </div>
+              </motion.div>
+        
         </>
       ) : (
         ''
       )}
 
       <button
-        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${isValid&&"hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]"}  disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed`}
         onClick={nextStepper}
         disabled={!isValid}
       >

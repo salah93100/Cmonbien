@@ -1,5 +1,5 @@
 import { React, useEffect } from 'react';
-
+import { motion } from 'framer-motion';
 const SaleSelect = ({
   children,
   booking,
@@ -32,17 +32,29 @@ const SaleSelect = ({
 
   return (
     <div className="space-y-6">
+       <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               className="w-full inline-flex flex-col "
+            >
       <p className="px-8 py-4 bg-[#f0562325] rounded-md rounded-bl-none">
         Souhaitez-vous vendre votre l'appartement ?
       </p>
-
-      <div className="flex flex-col gap-3">
+      </motion.div>
+      <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.6}}
+               whileInView={{y:0}}
+               className="flex flex-col gap-3 "
+            >
+    
         {console.log(isValid+"--------")}
         {ArraySales.map(sales => {
           return (
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                watch('sellingHouse') === sales.value ? 'border-[#f05623]' : ''
+                watch('sellingHouse') === sales.value ? 'border-[#005c7c]' : ''
               } `}
             >
               <input
@@ -56,7 +68,7 @@ const SaleSelect = ({
             </label>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };

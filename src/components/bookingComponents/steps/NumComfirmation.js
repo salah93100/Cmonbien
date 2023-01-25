@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
-
+import { motion } from 'framer-motion';
 
 const NumComfirmation = ({
   children,
@@ -70,14 +70,20 @@ const NumComfirmation = ({
   }, [formTel]);
    
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 flex flex-col gap-2 ">
           {console.log(formTel.phoneNum)}
 
       <div className="text-center  space-6 ">
         <p className="text-4xl my-5">Numéro de Vérification</p>
+        <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               className="w-full  "
+            >
         <PhoneInput
           containerClass="w-full"
-          inputClass="w-full  flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
+          inputClass="w-full  flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
           buttonClass=""
           onlyCountries={['fr']}
           country={"fr"}
@@ -91,10 +97,10 @@ const NumComfirmation = ({
             }}
         
         />
-       
+       </motion.div>
       </div>
       <button
-        className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-8 py-4 bg-[#005c7c] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
         onClick={handleSubmitNum}
        disabled={disabled}
         
@@ -103,21 +109,34 @@ const NumComfirmation = ({
       </button>
       {open ? (
         <>
-       
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               className="w-full  "
+            >
           <input
             type="tel"
             name="codePhone"
             value={formTel.codePhone}
-            className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
+            className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
             placeholder="_ _ _ _"
             onChange={handleChange}
           />
+          </motion.div>
+          <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.6}}
+               whileInView={{y:0}}
+               className="w-full  "
+            >
           <button
-            className="px-8 py-4 bg-[#f05623] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-8 py-4 bg-[#005c7c] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={handleSubmitCode}
           >
             Je veux recevoir mon estimation, cliquez ici!
-          </button>{' '}
+          </button>
+          </motion.div>{' '}
         </>
       ) : (
         ''

@@ -10,6 +10,8 @@ import { SkeletonText, Stack, Skeleton } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import { Formatrelative, isValid } from 'date-fns';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { motion } from "framer-motion"
+
 
 const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,errors }) => {
   useEffect(() => {
@@ -60,12 +62,24 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
   }
   return (
     <div className="space-y-6 w-full ">
-      <p className="px-8 py-4 bg-[#f05623] rounded-md rounded-bl-none text-white">
+         <motion.div
+    initial={{y:100}} 
+    transition={{duration:0.3}}
+     whileInView={{y:0}}
+    >
+      <p className="px-8 py-4 bg-[#005c7c] rounded-md rounded-bl-none text-white">
         C'est parti! Cela ne devrait pas vous prendre plus de <span className="font-bold">4 minutes</span>...
       </p>
-      <p className="px-8 py-4 bg-[#f05623] rounded-md rounded-bl-none text-white">
+      </motion.div>
+      <motion.div
+    initial={{y:100}} 
+    transition={{duration:0.6}}
+     whileInView={{y:0}}
+    >
+      <p className="px-8 py-4 bg-[#005c7c] rounded-md rounded-bl-none text-white">
         Nous sommes prêts à évaluer votre bien.
       </p>
+      </motion.div>
       <Autocomplete
         onPlaceChanged={onPlaceChanged}
         onLoad={onLoad}
@@ -81,7 +95,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
             { pattern: /^[A-Za-z]+$/i }
           )}
           placeholder="Adresse..."
-          className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623] w-full rounded"
+          className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
         />
       </Autocomplete>
       {errors.adress && (
@@ -92,7 +106,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
             width: '100%',
             height: '300px',
             borderRadius: '4px',
-            borderColor: '#f05623',
+            borderColor: '#005c7c',
             borderWidth: '2px',
         }}
         center={markerLocation ? markerLocation : {

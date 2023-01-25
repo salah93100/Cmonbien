@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { MdHouse } from 'react-icons/md';
 import { FaBuilding } from 'react-icons/fa';
-
+import { motion } from 'framer-motion';
 import { Icon } from '@chakra-ui/react';
 
 const HouseSelect = ({ children, booking, setBooking, setNextStep ,register,errors,watch}) => {
@@ -21,10 +21,22 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep ,register,erro
   }, [watch('houseOptions')]);
   return (
     <div className="space-y-6">
-      <p className={`px-8 py-4 bg-[#f05623] text-white rounded-md rounded-bl-none`}>
+        <motion.div
+    initial={{y:100}} 
+    transition={{duration:0.3}}
+     whileInView={{y:0}}
+    >
+      <p className={`px-8 py-4 bg-[#005c7c] text-white rounded-md rounded-bl-none`}>
         Quel type de bien souhaitez-vous évaluer ?
       </p>
-      <div className="flex flex-col gap-3">
+      </motion.div>
+      <motion.div
+    initial={{y:100}} 
+    transition={{duration:0.4}}
+     whileInView={{y:0}}
+     className="flex flex-col gap-3"
+    >
+    
         <label className={`border w-full text-left  px-8 py-4 rounded ${watch('houseOptions')==="House"?'border-[#075b97] ':''}`}>
       
         <input
@@ -55,14 +67,15 @@ const HouseSelect = ({ children, booking, setBooking, setNextStep ,register,erro
           )}
           value="Appartement"
           className={`mr-2 checked:bg-blue-500${
-            selected === 'appart' ? 'border-[#f05623]' : ''
+            selected === 'appart' ? 'border-[#005c7c]' : ''
           }`}
           onClick={handleClick}
           />
           <Icon as={FaBuilding} w={6} h={6} />
           Appartement
           </label>
-      </div>
+    
+      </motion.div>
     </div>
   );
 };

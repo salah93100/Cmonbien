@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const VerificationSelect = ({
   children,
@@ -16,7 +17,13 @@ const VerificationSelect = ({
   return (
     <div className="space-y-6">
       <h1 className="text-4xl text-center">Verification</h1>
-      <div className="flex flex-col gap-3">
+      <motion.div
+              initial={{y:100}} 
+              transition={{duration:0.3}}
+               whileInView={{y:0}}
+               className="flex flex-col gap-3"
+            >
+     
         <input
           type="text"
           placeholder="Email"
@@ -28,7 +35,7 @@ const VerificationSelect = ({
             },
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
         />
         {errors.email && <p className="text-red-400">{errors.email.message}</p>}
 
@@ -41,7 +48,7 @@ const VerificationSelect = ({
             { required: 'Votre Prénom est requis' },
             { pattern: /^[A-Za-z]+$/i }
           )}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
         />
         {errors.firstName && (
           <p className="text-red-400">{errors.firstName.message}</p>
@@ -55,12 +62,12 @@ const VerificationSelect = ({
             { required: 'Votre Nom est requis' },
             { pattern: /^[A-Za-z]+$/i }
           )}
-          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#f05623] focus:ring-[#f05623]"
+          className="inline-flex border px-4 py-4 rounded  w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
         />
         {errors.lastName && (
           <p className="text-red-400"> {errors.lastName.message}</p>
         )}
-      </div>
+   </motion.div>
     </div>
   );
 };
