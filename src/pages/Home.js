@@ -51,9 +51,23 @@ export default function Home() {
   });
   const onSubmit = data => {
     console.log(data);
+  
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://app.cmonbien.fr/api/submit-form");
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.onload = function (event) {
+        if (xhr.status !== 200) { // analyse l'état HTTP de la réponse
+          alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+        } else { // show the result
+          alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
+        }
+      };
+     
+      xhr.send(JSON.stringify(data));
+    }
   //  setStep(prev => prev + 1);
-  };
-
+ 
   return (
     <>
       <FormStepper
