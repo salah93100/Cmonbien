@@ -1,3 +1,7 @@
 .react-tel-input .form-control {
   width: 100% !important;
 }
+
+* {
+  scroll-behavior: smooth;
+}
