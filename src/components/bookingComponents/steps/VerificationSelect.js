@@ -18,12 +18,11 @@ const VerificationSelect = ({
     <div className="space-y-6">
       <h1 className="text-4xl text-center">Verification</h1>
       <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               className="flex flex-col gap-3"
-            >
-     
+        initial={{ y: 100 }}
+        transition={{ duration: 0.3 }}
+        whileInView={{ y: 0 }}
+        className="flex flex-col gap-3"
+      >
         <input
           type="text"
           placeholder="Email"
@@ -67,7 +66,7 @@ const VerificationSelect = ({
         {errors.lastName && (
           <p className="text-red-400"> {errors.lastName.message}</p>
         )}
-   </motion.div>
+      </motion.div>
     </div>
   );
 };

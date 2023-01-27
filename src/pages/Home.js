@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm,Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import FormStepper from '../components/bookingComponents/steps/FormStepper';
 import AdresseSelect from '../components/bookingComponents/steps/AdresseSelect';
 import HouseSelect from '../components/bookingComponents/steps/HouseSelect';
@@ -11,8 +11,6 @@ import VerificationSelect from '../components/bookingComponents/steps/Verificati
 import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
 import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
 
-
-
 export default function Home() {
   const {
     register,
@@ -21,14 +19,14 @@ export default function Home() {
     setError,
     setValue,
     control,
-    formState: { errors,isValid },
-  } = useForm({mode:"all", defaultValues: {
-    adress: '',
-    houseOptions: '',
-  
-  }}
- );
-
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      adress: '',
+      houseOptions: '',
+    },
+  });
 
   const [step, setStep] = useState(0);
   const [nextStep, setNextStep] = useState(true);
@@ -38,11 +36,7 @@ export default function Home() {
     houseType: '',
     stageApart: {},
     owner: '',
-    surface:
-    {Surface:0,
-      SurTerrain:0,
-      SurfaceBalcon:0
-    },
+    surface: { Surface: 0, SurTerrain: 0, SurfaceBalcon: 0 },
     yearsBuild: 1900,
     yearsRenovated: 1900,
     renovated: null,
@@ -51,23 +45,25 @@ export default function Home() {
   });
   const onSubmit = data => {
     console.log(data);
-  
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://app.cmonbien.fr/api/submit-form");
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.onload = function (event) {
-        if (xhr.status !== 200) { // analyse l'état HTTP de la réponse
-          alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-        } else { // show the result
-          alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
-        }
-      };
-     
-      xhr.send(JSON.stringify(data));
-    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://app.cmonbien.fr/api/submit-form');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = function (event) {
+      if (xhr.status !== 200) {
+        // analyse l'état HTTP de la réponse
+        alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+      } else {
+        // show the result
+        alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
+      }
+    };
+
+    xhr.send(JSON.stringify(data));
+  };
   //  setStep(prev => prev + 1);
- 
+
   return (
     <>
       <FormStepper
@@ -101,7 +97,6 @@ export default function Home() {
           watch={watch}
           onSubmit={onSubmit}
           handleSubmit={handleSubmit}
-          
           required
         />
         <DetailsHouse
@@ -126,7 +121,8 @@ export default function Home() {
           errors={errors}
           setValue={setValue}
           setError={setError}
-          isValid={isValid}        />
+          isValid={isValid}
+        />
         <SaleSelect
           setBooking={setBooking}
           booking={booking}
@@ -147,16 +143,16 @@ export default function Home() {
           isValid={isValid}
           required
         />
-        <NumComfirmation 
-        setStep={setStep} 
-        isValid={isValid} 
-        Controller={Controller}
-        control={control}
-        setValue={setValue}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}/>
-        <MessageConfirmation 
-        isValid={isValid}/>
+        <NumComfirmation
+          setStep={setStep}
+          isValid={isValid}
+          Controller={Controller}
+          control={control}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+        />
+        <MessageConfirmation isValid={isValid} />
       </FormStepper>
     </>
   );
