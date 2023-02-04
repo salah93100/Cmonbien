@@ -1,15 +1,16 @@
 import { useState } from "react";
 
-const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max})=>{
+const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max, clearErrors})=>{
     const ValueCounter=watch(`${array}.${[name]}`)
     const test=watch(`${array}`)
     const increaseCounterAppart = e => {
         const { id,name } = e.target;
         
-        if (isNaN(watch(`${array}.${[name]}`))) return setValue(`${array}.${[name]}`,1)
+        if (isNaN(watch(`${array}.${[name]}`))) return setValue(`${array}.${[name]}`,Number(1)) 
         
         if (watch(`${array}.${[name]}`)<max)
-      return  setValue(`${array}.${[name]}`,Number(watch(`${array}.${[name]}`))+1)
+      return  setValue(`${array}.${[name]}`,Number(watch(`${array}.${[name]}`))+Number(1)) && clearErrors(`${array}.${[name]}`)
+        
        
       };
       const decreaseCounterAppart = e => {
@@ -56,7 +57,9 @@ const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max
               <button
                 className="border   px-8 py-4 rounded-r"
                 id={id}
-                onClick={increaseCounterAppart}
+                onClick={(e)=>{
+                  increaseCounterAppart(e);
+                  clearErrors(`${array}.${[name]}`)}}
                 name={name}
               >
                 +

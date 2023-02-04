@@ -19,13 +19,33 @@ export default function Home() {
     handleSubmit,
     watch,
     setError,
+    clearErrors ,
     setValue,
     control,
     formState: { errors,isValid },
   } = useForm({mode:"all", defaultValues: {
     adress: '',
     houseOptions: '',
-  
+    counterArrayRoom:{
+      numberBathroom:0,
+numberParkingIn:0,
+numberParkingOut:0,
+numberRoom:0
+
+    }
+    ,stageApart: {
+    NumberStepAppartment
+    : 
+    1,
+    NumberStepBuilding
+    : 
+    1},
+    counterSuface: 
+{Surface:5, 
+SurfaceBalcon: 200,
+SurfaceTerrain:10}
+  ,yearsBuild:1900,
+  yearsRenovated:1900
   }}
  );
 
@@ -42,6 +62,13 @@ export default function Home() {
     {Surface:0,
       SurTerrain:0,
       SurfaceBalcon:0
+    },
+    counterArrayRoom:{
+      numberBathroom:0,
+numberParkingIn:0,
+numberParkingOut:0,
+numberRoom:0
+
     },
     yearsBuild: 1900,
     yearsRenovated: 1900,
@@ -114,6 +141,7 @@ export default function Home() {
           setValue={setValue}
           setError={setError}
           isValid={isValid}
+          clearErrors={clearErrors} 
         />
         <SurfaceSelect
           setBooking={setBooking}
@@ -126,7 +154,8 @@ export default function Home() {
           errors={errors}
           setValue={setValue}
           setError={setError}
-          isValid={isValid}        />
+          isValid={isValid}   
+          clearErrors={clearErrors}     />
         <SaleSelect
           setBooking={setBooking}
           booking={booking}

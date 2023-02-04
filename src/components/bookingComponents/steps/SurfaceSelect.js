@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import CounterStep from '../CounterStep';
 import { motion } from 'framer-motion';
 
-const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid}) => {
+const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid,clearErrors}) => {
   const [disabled, setDisabled] = useState(true);
 
   const [counterArrayRoom, setCounterArrayRoom] = useState({
@@ -18,7 +18,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       name: 'numberRoom',
       value: counterArrayRoom.numberRoom,
       placeHolder: 'Nombre de pièces',
-      min:1,
+      min:0,
       max:20
     },
     {
@@ -26,7 +26,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       name: 'numberBathroom',
       value: counterArrayRoom.numberBathroom,
       placeHolder: 'Nombre de salles de bain',
-      min:1,
+      min:0,
       max:5
     },
     {
@@ -171,7 +171,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                whileInView={{y:0}}
                viewport={{once:true}}>
       <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-        Quelle est la surface habitable de l'appartement? Surface (Carrez) m
+        Quelle est la surface habitable de {watch('houseOptions')==="House"?"l'appartement":"la maison"}? Surface (Carrez) m
       </p>
       </motion.div>
       <motion.div
@@ -184,12 +184,14 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       <CounterStep register={register} setValue={setValue} watch={watch} name={'Surface'} id={'Surface'} label={'Surface (Carrez) m² 1'}
        array={'counterSuface'} setError={setError} errors={errors} 
        min={5}
-       max={1000}/>
-      <CounterStep register={register} setValue={setValue} watch={watch} name={'SurfaceBalcon'} id={'SurfaceBalcon'} label={'Surface des balcons m²'} array={'counterSuface'} setError={setError} errors={errors} min={200}
+       max={1000}
+       clearErrors={clearErrors}/>
+      <CounterStep  clearErrors={clearErrors} register={register} setValue={setValue} watch={watch} name={'SurfaceBalcon'} id={'SurfaceBalcon'} label={'Surface des balcons m²'} array={'counterSuface'} setError={setError} errors={errors} min={200}
        max={500}/>
-      <CounterStep register={register} setValue={setValue} watch={watch} name={'SurfaceTerrain'} id={'SurfaceTerrain'} label={'Surface du terrain m²'} array={'counterSuface'} setError={setError} errors={errors} min={10}
+      { watch("houseOptions")==="House"?(
+      <CounterStep  clearErrors={clearErrors} register={register} setValue={setValue} watch={watch} name={'SurfaceTerrain'} id={'SurfaceTerrain'} label={'Surface du terrain m²'} array={'counterSuface'} setError={setError} errors={errors} min={watch("houseOptions")==="House"?10:0}
        max={100000}/>
-
+       ):""}
        
     
 </motion.div>
@@ -205,7 +207,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                viewport={{once:true}}
               >
           <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-            Quelle est l'année de construction de la maison?
+            Quelle est l'année de construction de {watch("houseOptions")=== "House" ? "la maison":"l'appartement"}?
           </p>
           </motion.div>
           <motion.div
@@ -375,6 +377,7 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                 <>
                
                       <CounterStep 
+                         clearErrors={clearErrors}
                          register={register} 
                          setValue={setValue} 
                          watch={watch} 
