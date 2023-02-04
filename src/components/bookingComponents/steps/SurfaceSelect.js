@@ -4,6 +4,7 @@ import CounterStep from '../CounterStep';
 import { motion } from 'framer-motion';
 
 const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid,clearErrors}) => {
+
   const [disabled, setDisabled] = useState(true);
 
   const [counterArrayRoom, setCounterArrayRoom] = useState({
@@ -18,32 +19,33 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       name: 'numberRoom',
       value: counterArrayRoom.numberRoom,
       placeHolder: 'Nombre de pièces',
-      min:0,
-      max:20
+      min: 1,
+      max: 20,
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberBathroom',
       value: counterArrayRoom.numberBathroom,
       placeHolder: 'Nombre de salles de bain',
-      min:0,
-      max:5
+
+      min: 1,
+      max: 5,
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberParkingIn',
       value: counterArrayRoom.numberParkingIn,
       placeHolder: 'Nombre de places de parking couvertes',
-      min:0,
-      max:6
+      min: 0,
+      max: 6,
     },
     {
       id: 'ArrayCounterRoomParking',
       name: 'numberParkingOut',
       value: counterArrayRoom.numberParkingOut,
       placeHolder: 'Nombre de places de parking extérieures',
-      min:0,
-      max:6
+      min: 0,
+      max: 6,
     },
   ];
 
@@ -56,20 +58,14 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
   });
 
   const increaseCounterAppart = e => {
-    const { name, id,value } = e.target;
+    const { name, id, value } = e.target;
     if (id === 'ArrayCounterRoomParking') {
-     
       setCounterArrayRoom(prevState => ({
         ...counterArrayRoom,
-        [name]:  Number(prevState[name]) + 1,
+        [name]: Number(prevState[name]) + 1,
       }));
       setBooking({ ...booking, nombreRoom: counterArrayRoom });
-
-    }
-     
-    
-    
-    else {
+    } else {
       setCounterSuface(prevState => ({
         ...counterSuface,
         [name]: Number(prevState[name]) + 1,
@@ -110,7 +106,6 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
         setDisabled(false);
       }
     } else {
-     
       setBooking({ ...booking, [name]: JSON.parse(value) });
       setDisabled(false);
     }
@@ -121,22 +116,25 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       setStep(prev => prev + 1);
     } else {
       setStepCompoments(prev => prev + 1);
-      
     }
   };
-  
-  const handleChangeInput = e => {
-    const { name,value,id } = e.target;
-    
-      
-    if (id === 'ArrayCounterRoomParking') {
-    setBooking({...booking,nombreRoom:{...booking.nombreRoom,[name]:value}});
-    setCounterArrayRoom({...counterArrayRoom,[name]:value})
 
+  const handleChangeInput = e => {
+    const { name, value, id } = e.target;
+
+    if (id === 'ArrayCounterRoomParking') {
+      setBooking({
+        ...booking,
+        nombreRoom: { ...booking.nombreRoom, [name]: value },
+      });
+      setCounterArrayRoom({ ...counterArrayRoom, [name]: value });
+    } else {
+      setBooking({
+        ...booking,
+        surface: { ...booking.surface, [name]: value },
+      });
+      setCounterSuface({ ...counterSuface, [name]: value });
     }
-    else{
-    setBooking({...booking,surface:{...booking.surface,[name]:value}});
-    setCounterSuface({...counterSuface,[name]:value})}
   };
 
   useEffect(() => {
@@ -146,26 +144,29 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
   }, [stepCompoments]);
   return (
     <div className="space-y-6">
-        <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-        Cette étape est la plus importante!
-      </p>
+      <motion.div
+        initial={{ y: 100 }}
+        transition={{ duration: 0.3 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true }}
+      >
+        <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+          Cette étape est la plus importante!
+        </p>
       </motion.div>
       <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.5}}
-               whileInView={{y:0}}
-               viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
-        Assurez-vous de répondre soigneusement aux prochaines questions afin
-        d'obtenir l'évaluation la plus précise possible.
-      </p>
+        initial={{ y: 100 }}
+        transition={{ duration: 0.5 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true }}
+      >
+        <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
+          Assurez-vous de répondre soigneusement aux prochaines questions afin
+          d'obtenir l'évaluation la plus précise possible.
+        </p>
       </motion.div>
       <motion.div
+
               initial={{y:100}} 
               transition={{duration:0.7}}
                whileInView={{y:0}}
@@ -209,42 +210,43 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
           <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
             Quelle est l'année de construction de {watch("houseOptions")=== "House" ? "la maison":"l'appartement"}?
           </p>
+
+
+      
+
           </motion.div>
           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.6}}
-               whileInView={{y:0}
-              }
-              viewport={{once:true}}
-               className='flex inline-flex	flex-col	w-full gap-2'
-              >
-      
-          <label for="yearsBuild">Année de construction</label>
-          <input
-            
-            type="number"
-            {...register("yearsBuild", 
-            {required:'La valeur ne peu être nulle' ,
-            maxLength : {
-              value: 4,
-              message: 'date au format YYYY' // JS only: <p>error message</p> TS only support string
-            },
-            max: {
-              value:2025,
-              message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025` // JS only: <p>error message</p> TS only support string
-            },
-            min: {
-              value:1700 ,
-              message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700` // JS only: <p>error message</p> TS only support string
-            }
-          })}
-          value={watch("yearsBuild")}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
-          />
-          {errors.yearsBuild && <p className="text-red-600 ">{errors.yearsBuild.message}</p>}
-
-
-        </motion.div>
+            initial={{ y: 100 }}
+            transition={{ duration: 0.6 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            className="flex inline-flex	flex-col	w-full gap-2"
+          >
+            <label for="yearsBuild">Année de construction</label>
+            <input
+              type="number"
+              {...register('yearsBuild', {
+                required: 'La valeur ne peu être nulle',
+                maxLength: {
+                  value: 4,
+                  message: 'date au format YYYY', // JS only: <p>error message</p> TS only support string
+                },
+                max: {
+                  value: 2025,
+                  message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
+                },
+                min: {
+                  value: 1700,
+                  message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
+                },
+              })}
+              value={watch('yearsBuild')}
+              className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
+            />
+            {errors.yearsBuild && (
+              <p className="text-red-600 ">{errors.yearsBuild.message}</p>
+            )}
+          </motion.div>
         </>
       ) : (
         ''
@@ -253,128 +255,117 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
       {stepCompoments > 1 ? (
         <>
           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-              
-              >
-          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-          Votre bien a-t-il été rénové ?
-          </p>
+            initial={{ y: 100 }}
+            transition={{ duration: 0.3 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+              Votre bien a-t-il été rénové ?
+            </p>
           </motion.div>
           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.6}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-               className="flex flex-col gap-3"
-              >
-      
+            initial={{ y: 100 }}
+            transition={{ duration: 0.6 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-3"
+          >
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-                watch("renovated")=== "true" ? 'border-[#005c7c]' : ''
+                watch('renovated') === 'true' ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
                 type="radio"
-                
-                {...register("renovated",{required:"choisire une option"})}
+                {...register('renovated', { required: 'choisire une option' })}
                 value={true}
                 className="mr-2"
-           
               />
               Oui
             </label>
 
             <label
               className={`border w-full text-left  px-8 py-4 rounded ${
-              watch("renovated") === "false" ? 'border-[#005c7c]' : ''
+                watch('renovated') === 'false' ? 'border-[#005c7c]' : ''
               }`}
             >
               <input
                 type="radio"
-              
-                
-                {...register("renovated",{required:"choisire une option"})}
+                {...register('renovated', { required: 'choisire une option' })}
                 value={false}
                 className="mr-2"
-           
               />
               Non
             </label>
-            </motion.div>
+          </motion.div>
         </>
       ) : (
         ''
       )}
-      {stepCompoments > 1 &&  watch("renovated") === "true" ? (
+      {stepCompoments > 1 && watch('renovated') === 'true' ? (
         <>
-           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-              
-              >
-          <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
-            Année de rénovation
-          </p>
-
+          <motion.div
+            initial={{ y: 100 }}
+            transition={{ duration: 0.3 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
+              Année de rénovation
+            </p>
           </motion.div>
           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-               className='flex 	flex-col	w-full gap-2'
-            >
+            initial={{ y: 100 }}
+            transition={{ duration: 0.3 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            className="flex 	flex-col	w-full gap-2"
+          >
+            <label for="yearsRenovated">Année de rénovation</label>
 
-          <label for="yearsRenovated">Année de rénovation</label>
+            <input
+              type="number"
+              {...register('yearsRenovated', {
+                required: 'La valeur ne peu être nulle',
+                maxLength: {
+                  value: 4,
+                  message: 'date au format YYYY', // JS only: <p>error message</p> TS only support string
+                },
+                max: {
+                  value: 2025,
+                  message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
+                },
+                min: {
+                  value: 1700,
+                  message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
+                },
+              })}
+              value={watch('yearsRenovated')}
+              className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
+            />
 
-          <input
-           
-            type="number"
-            {...register("yearsRenovated", 
-            {required:'La valeur ne peu être nulle' ,
-            maxLength : {
-              value: 4,
-              message: 'date au format YYYY' // JS only: <p>error message</p> TS only support string
-            },
-            max: {
-              value:2025,
-              message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025` // JS only: <p>error message</p> TS only support string
-            },
-            min: {
-              value:1700 ,
-              message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700` // JS only: <p>error message</p> TS only support string
-            }
-          })}
-          
-                 value={watch("yearsRenovated")}
-            className="inline-flex border px-8 py-4 rounded text-center w-full focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c]"
-          />
-
-{errors.yearsRenovated && <p className="text-red-600 ">{errors.yearsRenovated.message}</p>}
-</motion.div>
-
+            {errors.yearsRenovated && (
+              <p className="text-red-600 ">{errors.yearsRenovated.message}</p>
+            )}
+          </motion.div>
         </>
       ) : (
         ''
       )}
       {stepCompoments > 2 ? (
         <>
-         
           <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               className="w-full inline-flex flex-col "
-               viewport={{once:true}}
-            >
+            initial={{ y: 100 }}
+            transition={{ duration: 0.3 }}
+            whileInView={{ y: 0 }}
+            className="w-full inline-flex flex-col "
+            viewport={{ once: true }}
+          >
             {ArrayCounterRoomParking.map(counter => {
               return (
                 <>
+
                
                       <CounterStep 
                          clearErrors={clearErrors}
@@ -392,18 +383,21 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
                          />
 
          
+
                 </>
               );
             })}
-              </motion.div>
-        
+          </motion.div>
         </>
       ) : (
         ''
       )}
 
       <button
-        className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${isValid&&"hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]"}  disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed`}
+        className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
+          isValid &&
+          'hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]'
+        }  disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed`}
         onClick={nextStepper}
         disabled={!isValid}
       >

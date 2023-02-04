@@ -10,10 +10,16 @@ import { SkeletonText, Stack, Skeleton } from '@chakra-ui/react';
 import { useState, useRef, useEffect } from 'react';
 import { Formatrelative, isValid } from 'date-fns';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion';
 
-
-const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,errors }) => {
+const AdresseSelect = ({
+  setBooking,
+  booking,
+  setNextStep,
+  nextStep,
+  register,
+  errors,
+}) => {
   useEffect(() => {
     if (booking.adress.length > 0) {
       setNextStep(false);
@@ -62,29 +68,30 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
   }
   return (
     <div className="space-y-6 w-full ">
-         <motion.div
-    initial={{y:100}} 
-    transition={{duration:0.3}}
-     whileInView={{y:0}}
-    >
-      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none ">
-        C'est parti! Cela ne devrait pas vous prendre plus de <span className="font-bold">4 minutes</span>...
-      </p>
+      <motion.div
+        initial={{ y: 100 }}
+        transition={{ duration: 0.3 }}
+        whileInView={{ y: 0 }}
+      >
+        <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none ">
+          C'est parti! Cela ne devrait pas vous prendre plus de{' '}
+          <span className="font-bold">4 minutes</span>...
+        </p>
       </motion.div>
       <motion.div
-    initial={{y:100}} 
-    transition={{duration:0.6}}
-     whileInView={{y:0}}
-    >
-      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
-        Nous sommes prêts à évaluer votre bien.
-      </p>
+        initial={{ y: 100 }}
+        transition={{ duration: 0.6 }}
+        whileInView={{ y: 0 }}
+      >
+        <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
+          Nous sommes prêts à évaluer votre bien.
+        </p>
       </motion.div>
       <Autocomplete
         onPlaceChanged={onPlaceChanged}
         onLoad={onLoad}
         types={['address']}
-        restrictions={{ country: ['fr'],  }}
+        restrictions={{ country: ['fr'] }}
       >
         <input
           type="text"
@@ -98,21 +105,23 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
           className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
         />
       </Autocomplete>
-      {errors.adress && (
-          <p className="text-red-400">{errors.adress.message}</p>
-        )}
+      {errors.adress && <p className="text-red-400">{errors.adress.message}</p>}
       <GoogleMap
         mapContainerStyle={{
-            width: '100%',
-            height: '300px',
-            borderRadius: '4px',
-            borderColor: '#005c7c',
-            borderWidth: '2px',
+          width: '100%',
+          height: '300px',
+          borderRadius: '4px',
+          borderColor: '#005c7c',
+          borderWidth: '2px',
         }}
-        center={markerLocation ? markerLocation : {
-            lat: 46.8,
-            lng: 2.2,
-        }}
+        center={
+          markerLocation
+            ? markerLocation
+            : {
+                lat: 46.8,
+                lng: 2.2,
+              }
+        }
         zoom={markerLocation ? 18 : 5}
         options={{
           zoomControl: true,
@@ -122,7 +131,7 @@ const AdresseSelect = ({ setBooking, booking, setNextStep, nextStep,register,err
         }}
         onLoad={map => setMap(map)}
       >
-          {markerLocation ? <Marker position={markerLocation} /> : '' }
+        {markerLocation ? <Marker position={markerLocation} /> : ''}
       </GoogleMap>
     </div>
   );

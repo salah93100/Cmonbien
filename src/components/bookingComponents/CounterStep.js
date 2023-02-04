@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max, clearErrors})=>{
     const ValueCounter=watch(`${array}.${[name]}`)
@@ -18,9 +18,9 @@ const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max
         if(Number(watch(`${array}.${[name]}`))>min){
             setValue(`${array}.${[name]}`,Number(watch(`${array}.${[name]}`))-1)
 
-        }
-      };
-
+        }}
+  
+        
     return(
         <>
     
@@ -64,14 +64,13 @@ const CounterStep =({register,watch,setValue ,label,name,id,array,errors,min,max
               >
                 +
               </button>
+ </div>
+   
 
-            </div>
-           
-         {errors[array] && <p className="text-red-600 ">{errors[array]?.[name]?.message}</p>}
 
-    
-      </>
-    )
+      {errors[array] &&    <p className="text-red-600 ">{errors[array]?.[name]?.message}</p>}
+    </>
+ )
 }
 
-export default CounterStep
+export default CounterStep;

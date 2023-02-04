@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm,Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import FormStepper from '../components/bookingComponents/steps/FormStepper';
 import AdresseSelect from '../components/bookingComponents/steps/AdresseSelect';
 import HouseSelect from '../components/bookingComponents/steps/HouseSelect';
@@ -10,8 +10,6 @@ import SaleSelect from '../components/bookingComponents/steps/SaleSelect';
 import VerificationSelect from '../components/bookingComponents/steps/VerificationSelect';
 import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
 import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
-
-
 
 export default function Home() {
   const {
@@ -50,6 +48,7 @@ SurfaceTerrain:10}
  );
 
 
+
   const [step, setStep] = useState(0);
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
@@ -70,6 +69,7 @@ numberParkingOut:0,
 numberRoom:0
 
     },
+
     yearsBuild: 1900,
     yearsRenovated: 1900,
     renovated: null,
@@ -78,23 +78,25 @@ numberRoom:0
   });
   const onSubmit = data => {
     console.log(data);
-  
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://app.cmonbien.fr/api/submit-form");
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.onload = function (event) {
-        if (xhr.status !== 200) { // analyse l'état HTTP de la réponse
-          alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-        } else { // show the result
-          alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
-        }
-      };
-     
-      xhr.send(JSON.stringify(data));
-    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://app.cmonbien.fr/api/submit-form');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = function (event) {
+      if (xhr.status !== 200) {
+        // analyse l'état HTTP de la réponse
+        alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+      } else {
+        // show the result
+        alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
+      }
+    };
+
+    xhr.send(JSON.stringify(data));
+  };
   //  setStep(prev => prev + 1);
- 
+
   return (
     <>
       <FormStepper
@@ -128,7 +130,6 @@ numberRoom:0
           watch={watch}
           onSubmit={onSubmit}
           handleSubmit={handleSubmit}
-          
           required
         />
         <DetailsHouse
@@ -156,6 +157,7 @@ numberRoom:0
           setError={setError}
           isValid={isValid}   
           clearErrors={clearErrors}     />
+
         <SaleSelect
           setBooking={setBooking}
           booking={booking}
@@ -176,16 +178,16 @@ numberRoom:0
           isValid={isValid}
           required
         />
-        <NumComfirmation 
-        setStep={setStep} 
-        isValid={isValid} 
-        Controller={Controller}
-        control={control}
-        setValue={setValue}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}/>
-        <MessageConfirmation 
-        isValid={isValid}/>
+        <NumComfirmation
+          setStep={setStep}
+          isValid={isValid}
+          Controller={Controller}
+          control={control}
+          setValue={setValue}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+        />
+        <MessageConfirmation isValid={isValid} />
       </FormStepper>
     </>
   );

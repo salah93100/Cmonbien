@@ -8,7 +8,7 @@ const SaleSelect = ({
   setNextStep,
   register,
   watch,
-  isValid
+  isValid,
 }) => {
   const ArraySales = [
     { id: 0, value: 'Oui, dès que possible' },
@@ -32,6 +32,7 @@ const SaleSelect = ({
 
   return (
     <div className="space-y-6">
+
        <motion.div
               initial={{y:100}} 
               transition={{duration:0.3}}
@@ -41,15 +42,15 @@ const SaleSelect = ({
       <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
         Souhaitez-vous vendre votre  {watch('houseOptions') === "House" ?'Maison':'Appartement' } ?
       </p>
+
       </motion.div>
       <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.6}}
-               whileInView={{y:0}}
-               className="flex flex-col gap-3 "
-            >
-    
-        {console.log(isValid+"--------")}
+        initial={{ y: 100 }}
+        transition={{ duration: 0.6 }}
+        whileInView={{ y: 0 }}
+        className="flex flex-col gap-3 "
+      >
+        {console.log(isValid + '--------')}
         {ArraySales.map(sales => {
           return (
             <label
@@ -60,7 +61,7 @@ const SaleSelect = ({
               <input
                 type="radio"
                 id="house"
-                {...register('sellingHouse',{required:"choice value"})}
+                {...register('sellingHouse', { required: 'choice value' })}
                 value={sales.value}
                 className="mr-2"
               />
