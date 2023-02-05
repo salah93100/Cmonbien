@@ -32,17 +32,16 @@ const SaleSelect = ({
 
   return (
     <div className="space-y-6">
-
-       <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               className="w-full inline-flex flex-col "
-            >
-      <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
-        Souhaitez-vous vendre votre  {watch('houseOptions') === "House" ?'Maison':'Appartement' } ?
-      </p>
-
+      <motion.div
+        initial={{ y: 100 }}
+        transition={{ duration: 0.3 }}
+        whileInView={{ y: 0 }}
+        className="w-full inline-flex flex-col "
+      >
+        <p className="px-8 py-4 bg-[#075b9725] rounded-md rounded-bl-none">
+          Souhaitez-vous vendre votre{' '}
+          {watch('houseOptions') === 'House' ? 'Maison' : 'Appartement'} ?
+        </p>
       </motion.div>
       <motion.div
         initial={{ y: 100 }}

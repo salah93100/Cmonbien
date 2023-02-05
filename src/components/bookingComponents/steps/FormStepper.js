@@ -59,7 +59,10 @@ const FormStepper = ({
             )}
 
             <button
-              className="px-8 py-4 bg-slate-700 text-white rounded w-full hover:bg-[#ffffff] hover:text-slate-700 hover:border hover:border-slate-700 "
+              className={
+                (step == 0 ? 'hidden' : '') +
+                ' px-8 py-4 bg-slate-700 text-white rounded w-full hover:bg-[#ffffff] hover:text-slate-700 hover:border hover:border-slate-700'
+              }
               onClick={buttonPrecedStepper}
             >
               Précedent

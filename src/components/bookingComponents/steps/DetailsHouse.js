@@ -3,9 +3,19 @@ import { useState, useEffect } from 'react';
 import CounterStep from '../CounterStep';
 import { motion } from 'framer-motion';
 
-
-const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,watch,setValue,setError,isValid,clearErrors}) => {
-
+const DetailsHouse = ({
+  children,
+  booking,
+  setBooking,
+  setStep,
+  register,
+  errors,
+  watch,
+  setValue,
+  setError,
+  isValid,
+  clearErrors,
+}) => {
   const radioArray = [
     {
       id: 0,
@@ -137,7 +147,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                     type="radio"
                     id={radio.id}
                     {...register(radio.name, {
-                      required: 'Choisir option Type',
+                      required: 'Veuillez choisir votre type de bien',
                     })}
                     value={radio.value}
                     className="mr-2 checked:bg-blue-500 "
@@ -162,9 +172,34 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
               <p className="px-8 py-4 bg-[#075b9725]rounded-md rounded-bl-none">
                 A quel étage se trouve l'appartement ?
               </p>
-              <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepAppartment'} id={'Appart'} label={'À quel étage est situé l’appartement ?'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50} clearErrors={clearErrors}/>
-              <CounterStep register={register} setValue={setValue} watch={watch} name={'NumberStepBuilding'} id={'Building'} label={'Nombre d’étages de l’immeuble'} array={'stageApart'} setError={setError} errors={errors} min={1} max={50} clearErrors={clearErrors}/>
-
+              <CounterStep
+                register={register}
+                setValue={setValue}
+                watch={watch}
+                name={'NumberStepAppartment'}
+                id={'Appart'}
+                label={'À quel étage est situé l’appartement ?'}
+                array={'stageApart'}
+                setError={setError}
+                errors={errors}
+                min={1}
+                max={50}
+                clearErrors={clearErrors}
+              />
+              <CounterStep
+                register={register}
+                setValue={setValue}
+                watch={watch}
+                name={'NumberStepBuilding'}
+                id={'Building'}
+                label={'Nombre d’étages de l’immeuble'}
+                array={'stageApart'}
+                setError={setError}
+                errors={errors}
+                min={1}
+                max={50}
+                clearErrors={clearErrors}
+              />
             </>
           ) : (
             ''
@@ -240,7 +275,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                   type="radio"
                   id="house"
                   {...register('owner', {
-                    required: 'Erreur choisir un type de propriéter',
+                    required: 'Veuillez choisir un type de propriété',
                   })}
                   value="Propriétaire"
                   className="mr-2"
@@ -256,7 +291,7 @@ const DetailsHouse = ({ children, booking, setBooking, setStep ,register,errors,
                   type="radio"
                   id="house"
                   {...register('owner', {
-                    required: 'Erreur choisir un type de propriéter',
+                    required: 'Veuillez choisir un type de propriété',
                   })}
                   value="Locataire"
                   className="mr-2"

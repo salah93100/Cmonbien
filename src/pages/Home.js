@@ -17,37 +17,30 @@ export default function Home() {
     handleSubmit,
     watch,
     setError,
-    clearErrors ,
+    clearErrors,
     setValue,
     control,
-    formState: { errors,isValid },
-  } = useForm({mode:"all", defaultValues: {
-    adress: '',
-    houseOptions: '',
-    counterArrayRoom:{
-      numberBathroom:0,
-numberParkingIn:0,
-numberParkingOut:0,
-numberRoom:0
-
-    }
-    ,stageApart: {
-    NumberStepAppartment
-    : 
-    1,
-    NumberStepBuilding
-    : 
-    1},
-    counterSuface: 
-{Surface:5, 
-SurfaceBalcon: 200,
-SurfaceTerrain:10}
-  ,yearsBuild:1900,
-  yearsRenovated:1900
-  }}
- );
-
-
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      adress: '',
+      houseOptions: '',
+      counterArrayRoom: {
+        numberBathroom: 0,
+        numberParkingIn: 0,
+        numberParkingOut: 0,
+        numberRoom: 0,
+      },
+      stageApart: {
+        NumberStepAppartment: 1,
+        NumberStepBuilding: 1,
+      },
+      counterSuface: { Surface: 5, SurfaceBalcon: 200, SurfaceTerrain: 10 },
+      yearsBuild: 1900,
+      yearsRenovated: 1900,
+    },
+  });
 
   const [step, setStep] = useState(0);
   const [nextStep, setNextStep] = useState(true);
@@ -57,17 +50,12 @@ SurfaceTerrain:10}
     houseType: '',
     stageApart: {},
     owner: '',
-    surface:
-    {Surface:0,
-      SurTerrain:0,
-      SurfaceBalcon:0
-    },
-    counterArrayRoom:{
-      numberBathroom:0,
-numberParkingIn:0,
-numberParkingOut:0,
-numberRoom:0
-
+    surface: { Surface: 0, SurTerrain: 0, SurfaceBalcon: 0 },
+    counterArrayRoom: {
+      numberBathroom: 0,
+      numberParkingIn: 0,
+      numberParkingOut: 0,
+      numberRoom: 0,
     },
 
     yearsBuild: 1900,
@@ -142,7 +130,7 @@ numberRoom:0
           setValue={setValue}
           setError={setError}
           isValid={isValid}
-          clearErrors={clearErrors} 
+          clearErrors={clearErrors}
         />
         <SurfaceSelect
           setBooking={setBooking}
@@ -155,8 +143,9 @@ numberRoom:0
           errors={errors}
           setValue={setValue}
           setError={setError}
-          isValid={isValid}   
-          clearErrors={clearErrors}     />
+          isValid={isValid}
+          clearErrors={clearErrors}
+        />
 
         <SaleSelect
           setBooking={setBooking}

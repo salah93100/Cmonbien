@@ -3,8 +3,19 @@ import { useState, useEffect } from 'react';
 import CounterStep from '../CounterStep';
 import { motion } from 'framer-motion';
 
-const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,setValue,setError,errors,isValid,clearErrors}) => {
-
+const SurfaceSelect = ({
+  children,
+  booking,
+  setBooking,
+  setStep,
+  register,
+  watch,
+  setValue,
+  setError,
+  errors,
+  isValid,
+  clearErrors,
+}) => {
   const [disabled, setDisabled] = useState(true);
 
   const [counterArrayRoom, setCounterArrayRoom] = useState({
@@ -166,54 +177,87 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
         </p>
       </motion.div>
       <motion.div
-
-              initial={{y:100}} 
-              transition={{duration:0.7}}
-               whileInView={{y:0}}
-               viewport={{once:true}}>
-      <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-        Quelle est la surface habitable de {watch('houseOptions')==="House"?"l'appartement":"la maison"}? Surface (Carrez) m
-      </p>
+        initial={{ y: 100 }}
+        transition={{ duration: 0.7 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true }}
+      >
+        <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+          Quelle est la surface habitable de{' '}
+          {watch('houseOptions') === 'House' ? "l'appartement" : 'la maison'}?
+          Surface (Carrez) m
+        </p>
       </motion.div>
       <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.8}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-               className="w-full inline-flex flex-col gap-2">
-     
-      <CounterStep register={register} setValue={setValue} watch={watch} name={'Surface'} id={'Surface'} label={'Surface (Carrez) m² 1'}
-       array={'counterSuface'} setError={setError} errors={errors} 
-       min={5}
-       max={1000}
-       clearErrors={clearErrors}/>
-      <CounterStep  clearErrors={clearErrors} register={register} setValue={setValue} watch={watch} name={'SurfaceBalcon'} id={'SurfaceBalcon'} label={'Surface des balcons m²'} array={'counterSuface'} setError={setError} errors={errors} min={200}
-       max={500}/>
-      { watch("houseOptions")==="House"?(
-      <CounterStep  clearErrors={clearErrors} register={register} setValue={setValue} watch={watch} name={'SurfaceTerrain'} id={'SurfaceTerrain'} label={'Surface du terrain m²'} array={'counterSuface'} setError={setError} errors={errors} min={watch("houseOptions")==="House"?10:0}
-       max={100000}/>
-       ):""}
-       
-    
-</motion.div>
+        initial={{ y: 100 }}
+        transition={{ duration: 0.8 }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true }}
+        className="w-full inline-flex flex-col gap-2"
+      >
+        <CounterStep
+          register={register}
+          setValue={setValue}
+          watch={watch}
+          name={'Surface'}
+          id={'Surface'}
+          label={'Surface (Carrez) m² 1'}
+          array={'counterSuface'}
+          setError={setError}
+          errors={errors}
+          min={5}
+          max={1000}
+          clearErrors={clearErrors}
+        />
+        <CounterStep
+          clearErrors={clearErrors}
+          register={register}
+          setValue={setValue}
+          watch={watch}
+          name={'SurfaceBalcon'}
+          id={'SurfaceBalcon'}
+          label={'Surface des balcons m²'}
+          array={'counterSuface'}
+          setError={setError}
+          errors={errors}
+          min={200}
+          max={500}
+        />
+        {watch('houseOptions') === 'House' ? (
+          <CounterStep
+            clearErrors={clearErrors}
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            name={'SurfaceTerrain'}
+            id={'SurfaceTerrain'}
+            label={'Surface du terrain m²'}
+            array={'counterSuface'}
+            setError={setError}
+            errors={errors}
+            min={watch('houseOptions') === 'House' ? 10 : 0}
+            max={100000}
+          />
+        ) : (
+          ''
+        )}
+      </motion.div>
 
-     
- 
       {stepCompoments > 0 ? (
         <>
-        <motion.div
-              initial={{y:100}} 
-              transition={{duration:0.3}}
-               whileInView={{y:0}}
-               viewport={{once:true}}
-              >
-          <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-            Quelle est l'année de construction de {watch("houseOptions")=== "House" ? "la maison":"l'appartement"}?
-          </p>
-
-
-      
-
+          <motion.div
+            initial={{ y: 100 }}
+            transition={{ duration: 0.3 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+              Quelle est l'année de construction de{' '}
+              {watch('houseOptions') === 'House'
+                ? 'la maison'
+                : "l'appartement"}
+              ?
+            </p>
           </motion.div>
           <motion.div
             initial={{ y: 100 }}
@@ -365,25 +409,20 @@ const SurfaceSelect = ({ children, booking, setBooking, setStep,register,watch,s
             {ArrayCounterRoomParking.map(counter => {
               return (
                 <>
-
-               
-                      <CounterStep 
-                         clearErrors={clearErrors}
-                         register={register} 
-                         setValue={setValue} 
-                         watch={watch} 
-                         name={counter.name} 
-                         id={counter.id}
-                         label={counter.placeHolder}
-                         array={'counterArrayRoom'} 
-                         setError={setError} 
-                         errors={errors}
-                         min={counter.min}
-                         max={counter.max}
-                         />
-
-         
-
+                  <CounterStep
+                    clearErrors={clearErrors}
+                    register={register}
+                    setValue={setValue}
+                    watch={watch}
+                    name={counter.name}
+                    id={counter.id}
+                    label={counter.placeHolder}
+                    array={'counterArrayRoom'}
+                    setError={setError}
+                    errors={errors}
+                    min={counter.min}
+                    max={counter.max}
+                  />
                 </>
               );
             })}
