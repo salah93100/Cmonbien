@@ -136,7 +136,7 @@ export default function Home({ initialStep = 0, email = '' }) {
       body: JSON.stringify(data),
     });
 
-    window.location.replace('https://www.cmonbien.fr/estimation-valide?email=' + email)
+    window.parent.location.replace('https://www.cmonbien.fr/estimation-valide?email=' + email)
   };
 
   return (
