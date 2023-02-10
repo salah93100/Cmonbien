@@ -1,11 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons';
 
 const MessageConfirmation = ({
-  children,
-  booking,
-  setBooking,
-  register,
-  errors,
   getValues,
 }) => {
   return (

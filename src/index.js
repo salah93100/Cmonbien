@@ -10,13 +10,19 @@ const root = ReactDOM.createRoot(document.getElementById('widget-cmonbien'));
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>Hello world!</div>,
+    element: <App />,
+  },
+  {
+    path: '/evaluation-realise',
+    element: <div>
+      
+    </div>,
   },
 ]);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

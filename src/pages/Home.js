@@ -11,7 +11,7 @@ import VerificationSelect from '../components/bookingComponents/steps/Verificati
 import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
 import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
 
-export default function Home() {
+export default function Home({ initialStep = 0, email = '' }) {
   const {
     register,
     handleSubmit,
@@ -44,7 +44,7 @@ export default function Home() {
     },
   });
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(initialStep);
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
     adress: '',
@@ -135,6 +135,8 @@ export default function Home() {
       },
       body: JSON.stringify(data),
     });
+
+    window.location.replace('https://www.cmonbien.fr/estimation-valide?email=' + email)
   };
 
   return (
@@ -232,7 +234,7 @@ export default function Home() {
           onSubmit={onSubmit}
           register={register}
         />
-        <MessageConfirmation getValues={getValues} isValid={isValid} />
+        <MessageConfirmation getValues={getValues} email={email} isValid={isValid} />
       </FormStepper>
     </>
   );
