@@ -18,11 +18,26 @@ const NumComfirmation = ({
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    if (value.length <= 4) {
-      setFormTel({ ...formTel, [name]: value });
+  const handleChangeCode = event => {
+    const code = event.target.value;
 
+    setFormTel({
+      ...formTel,
+      phoneCode: code,
+    });
+
+    if (code.length > 4) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      setDisabled(true);
+
+      return;
+    }
+
+    setValue('phoneCode', code);
+
+    if (code.length == 4) {
       setDisabled(false);
     }
   };
@@ -45,14 +60,17 @@ const NumComfirmation = ({
     );
   };
   const handleSubmitNum = () => {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://app.cmonbien.fr/api/send-verification', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(
-      JSON.stringify({
-        phone: formTel.numPhone,
-      })
-    );
+    fetch('https://app.cmonbien.fr/api/send-verification', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        phone: formTel.phoneNum,
+      }),
+    });
+
     setDisabled(true);
     setOpen(true);
   };
@@ -60,7 +78,7 @@ const NumComfirmation = ({
   const handleSubmitCode = () => {
     setStep(prev => prev + 1);
 
-    handleSubmit(onSubmit);
+    onSubmit();
   };
 
   useEffect(() => {
@@ -114,19 +132,17 @@ const NumComfirmation = ({
             className="w-full  "
           >
             <input
-              type="tel"
               name="codePhone"
-              value={formTel.codePhone}
               className="flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
+              onChange={handleChangeCode}
               placeholder="_ _ _ _"
-              onChange={handleChange}
             />
           </motion.div>
           <motion.div
             initial={{ y: 100 }}
             transition={{ duration: 0.6 }}
             whileInView={{ y: 0 }}
-            className="w-full  "
+            className="w-full"
           >
             <button
               className="px-8 py-4 bg-[#005c7c] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"

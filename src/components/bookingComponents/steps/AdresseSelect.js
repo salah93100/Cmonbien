@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Formatrelative, isValid } from 'date-fns';
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { motion } from 'framer-motion';
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 const AdresseSelect = ({
   setBooking,
@@ -19,6 +20,8 @@ const AdresseSelect = ({
   nextStep,
   register,
   errors,
+  setValue,
+  getValues,
 }) => {
   useEffect(() => {
     if (booking.adress.length > 0) {
@@ -47,15 +50,22 @@ const AdresseSelect = ({
         address: place.formatted_address,
       };
       setBooking({ ...booking, adress: formattedAddress.address });
-
-      getGeocode(formattedAddress).then(results => {
-        const { lat, lng } = getLatLng(results[0]);
-        setMarkerLocation({ lat: lat, lng: lng });
+      setMarkerLocation({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
       });
     } else {
       alert('Please enter text');
     }
   }
+
+  useEffect(() => {
+    if (markerLocation) {
+      setValue('lat', markerLocation.lat);
+      setValue('lng', markerLocation.lng);
+    }
+  }, [markerLocation]);
+
   if (!isLoaded) {
     return (
       <Stack>
@@ -68,6 +78,9 @@ const AdresseSelect = ({
   }
   return (
     <div className="space-y-6 w-full ">
+      <input type="hidden" {...register('lat', { pattern: /^[A-Za-z]+$/i })} />
+      <input type="hidden" {...register('lng', { pattern: /^[A-Za-z]+$/i })} />
+
       <motion.div
         initial={{ y: 100 }}
         transition={{ duration: 0.3 }}

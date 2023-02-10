@@ -201,7 +201,7 @@ const SurfaceSelect = ({
           watch={watch}
           name={'Surface'}
           id={'Surface'}
-          label={'Surface (Carrez) m² 1'}
+          label={'Surface (Carrez) m²'}
           array={'counterSuface'}
           setError={setError}
           errors={errors}
@@ -220,7 +220,7 @@ const SurfaceSelect = ({
           array={'counterSuface'}
           setError={setError}
           errors={errors}
-          min={200}
+          min={0}
           max={500}
         />
         {watch('houseOptions') === 'House' ? (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import FormStepper from '../components/bookingComponents/steps/FormStepper';
@@ -15,6 +15,7 @@ export default function Home() {
   const {
     register,
     handleSubmit,
+    getValues,
     watch,
     setError,
     clearErrors,
@@ -36,7 +37,7 @@ export default function Home() {
         NumberStepAppartment: 1,
         NumberStepBuilding: 1,
       },
-      counterSuface: { Surface: 5, SurfaceBalcon: 200, SurfaceTerrain: 10 },
+      counterSuface: { Surface: 5, SurfaceBalcon: 0, SurfaceTerrain: 10 },
       yearsBuild: 1900,
       yearsRenovated: 1900,
     },
@@ -64,26 +65,76 @@ export default function Home() {
     nombreRoom: {},
     sellingHouse: '',
   });
-  const onSubmit = data => {
-    console.log(data);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://app.cmonbien.fr/api/submit-form');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onload = function (event) {
-      if (xhr.status !== 200) {
-        // analyse l'état HTTP de la réponse
-        alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
-      } else {
-        // show the result
-        alert(`Done, got ${xhr.response.length} bytes`); // response est la réponse du serveur
-      }
+  useEffect(() => {
+    console.log(getValues());
+  }, [step]);
+
+  const onSubmit = () => {
+    console.log(getValues());
+    const {
+      lat,
+      lng,
+      adress,
+      yearsBuild,
+      yearsRenovated,
+      firstName,
+      lastName,
+      email,
+      houseOptions,
+      houseType,
+      counterSuface,
+      stageApart,
+      extra,
+      sellingHouse,
+      owner,
+      renovated,
+      counterArrayRoom,
+      phoneNum,
+      phoneCode,
+    } = getValues();
+
+    const data = {
+      lat,
+      lng,
+      address: adress,
+      'property-type': houseOptions == 'House' ? 'maison' : 'appartement',
+      'house-type': houseType,
+      'apartment-type': houseType,
+      'apartment-floor': stageApart.NumberStepAppartment,
+      'floors-in-building': stageApart.NumberStepBuilding,
+      elevator: extra.Ascenseur ? 'yes' : 'no',
+      'owner-radio': owner ? 'yes' : 'no',
+      'garden-area':
+        houseOptions == 'House' ? counterSuface.SurfaceTerrain : null,
+      'floor-area': counterSuface.Surface,
+      'balcony-area': counterSuface.SurfaceBalcon,
+      'construction-year': yearsBuild.toString(),
+      renovated: renovated ? 'yes' : 'no',
+      'renovation-year': yearsRenovated.toString(),
+      'number-of-rooms': counterArrayRoom.numberRoom,
+      'number-of-bathrooms': counterArrayRoom.numberBathroom,
+      'number-of-covered-parking': counterArrayRoom.numberParkingIn,
+      'number-of-outdoor-parking': counterArrayRoom.numberParkingOut,
+      'open-view': extra['Vue dégagée'] ? 'on' : '',
+      'radio-wanting-to-sell': sellingHouse,
+      email,
+      fname: firstName,
+      lname: lastName,
+      phone: phoneNum,
+      code: phoneCode,
+      payload: getValues(),
     };
 
-    xhr.send(JSON.stringify(data));
+    fetch('https://app.cmonbien.fr/api/submit-form', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   };
-  //  setStep(prev => prev + 1);
 
   return (
     <>
@@ -101,6 +152,8 @@ export default function Home() {
           setBooking={setBooking}
           booking={booking}
           nextStep={nextStep}
+          setValue={setValue}
+          getValues={getValues}
           setNextStep={setNextStep}
           register={register}
           errors={errors}
@@ -175,8 +228,9 @@ export default function Home() {
           setValue={setValue}
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
+          register={register}
         />
-        <MessageConfirmation isValid={isValid} />
+        <MessageConfirmation getValues={getValues} isValid={isValid} />
       </FormStepper>
     </>
   );

@@ -53,21 +53,21 @@ const CounterStep = ({
           type="number"
           value={ValueCounter}
           {...register(`${array}.${[name]}`, {
-            required: 'La valeur ne peu être nule',
+            required: 'La valeur ne peu être null',
             max: {
               value: max,
-              message: `erreur La valeur ne peu être supérieur à ${max}`, // JS only: <p>error message</p> TS only support string
+              message: `La valeur ne peu être supérieur à ${max}`, // JS only: <p>error message</p> TS only support string
             },
             min: {
               value: min,
-              message: `erreur La valeur ne peu être inférieur à ${min}`, // JS only: <p>error message</p> TS only support string
+              message: `La valeur ne peu être inférieur à ${min}`, // JS only: <p>error message</p> TS only support string
             },
           })}
           className="inline-flex border px-8 py-4 outline-none text-center w-full"
         />
         {console.log(errors)}
         <button
-          className="border   px-8 py-4 rounded-r"
+          className="border px-8 py-4 rounded-r"
           id={id}
           onClick={e => {
             increaseCounterAppart(e);
