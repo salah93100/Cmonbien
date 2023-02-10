@@ -31,7 +31,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "npx prettier --write .",
-    "build:widget": "parcel build src/index.js --no-source-maps"
+    "build:widget": "parcel build src/index.js --no-source-maps --dist-dir build/widget"
   },
   "eslintConfig": {
     "extends": [
