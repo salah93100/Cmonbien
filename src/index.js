@@ -7,22 +7,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('widget-cmonbien'));
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/evaluation-realise',
-    element: <div>
-      
-    </div>,
-  },
-]);
-
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );
 
