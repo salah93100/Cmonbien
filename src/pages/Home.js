@@ -71,7 +71,7 @@ export default function Home({ initialStep = 0, email = '' }) {
     console.log(getValues());
   }, [step]);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(getValues());
     const {
       lat,
@@ -127,7 +127,7 @@ export default function Home({ initialStep = 0, email = '' }) {
       payload: getValues(),
     };
 
-    fetch('https://app.cmonbien.fr/api/submit-form', {
+    await fetch('https://app.cmonbien.fr/api/submit-form', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
