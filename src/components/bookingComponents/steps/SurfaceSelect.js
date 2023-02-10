@@ -15,8 +15,10 @@ const SurfaceSelect = ({
   errors,
   isValid,
   clearErrors,
+  getFieldState,
 }) => {
   const [disabled, setDisabled] = useState(true);
+  const [valid, setValid] = useState(false);
 
   const [counterArrayRoom, setCounterArrayRoom] = useState({
     numberRoom: 0,
@@ -69,7 +71,10 @@ const SurfaceSelect = ({
   });
 
   const increaseCounterAppart = e => {
+    setDisabled(true);
+
     const { name, id, value } = e.target;
+    console.log(id);
     if (id === 'ArrayCounterRoomParking') {
       setCounterArrayRoom(prevState => ({
         ...counterArrayRoom,
@@ -86,7 +91,18 @@ const SurfaceSelect = ({
     setDisabled(false);
   };
 
+  useEffect(() => {
+    console.log('ok');
+    if (errors.counterArrayRoom) {
+      setValid(false);
+    } else {
+      setValid(true);
+    }
+  }, [disabled]);
+
   const decreaseCounterAppart = e => {
+    setDisabled(true);
+
     const { name, id } = e.target;
     if (id === 'ArrayCounterRoomParking') {
       if (counterArrayRoom[name] > 0) {
@@ -110,6 +126,8 @@ const SurfaceSelect = ({
   };
 
   const handleInput = e => {
+    setDisabled(true);
+
     const { name, value } = e.target;
     if (name === 'yearsBuild' || name === 'yearsRenovated') {
       if (value.length <= 4) {
@@ -131,6 +149,8 @@ const SurfaceSelect = ({
   };
 
   const handleChangeInput = e => {
+    setDisabled(true);
+
     const { name, value, id } = e.target;
 
     if (id === 'ArrayCounterRoomParking') {
@@ -184,8 +204,10 @@ const SurfaceSelect = ({
       >
         <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
           Quelle est la surface habitable de{' '}
-          {watch('houseOptions') === 'House' ? "l'appartement" : 'la maison'}?
-          Surface (Carrez) m
+          {watch('houseOptions') == 'Appartement'
+            ? "l'appartement"
+            : 'la maison'}
+          ? Surface (Carrez)
         </p>
       </motion.div>
       <motion.div
@@ -277,11 +299,11 @@ const SurfaceSelect = ({
                 },
                 max: {
                   value: 2025,
-                  message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
+                  message: `L'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
                 },
                 min: {
                   value: 1700,
-                  message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
+                  message: `L'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
                 },
               })}
               value={watch('yearsBuild')}
@@ -378,11 +400,11 @@ const SurfaceSelect = ({
                 },
                 max: {
                   value: 2025,
-                  message: `Erreur: l'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
+                  message: `L'année de rénovation ne peut étre supérieur à 2025`, // JS only: <p>error message</p> TS only support string
                 },
                 min: {
                   value: 1700,
-                  message: `Erreur: l'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
+                  message: `L'année de rénovation ne peut étre inférieur à 1700`, // JS only: <p>error message</p> TS only support string
                 },
               })}
               value={watch('yearsRenovated')}
@@ -406,24 +428,23 @@ const SurfaceSelect = ({
             className="w-full inline-flex flex-col "
             viewport={{ once: true }}
           >
-            {ArrayCounterRoomParking.map(counter => {
+            {ArrayCounterRoomParking.map((counter, index) => {
               return (
-                <>
-                  <CounterStep
-                    clearErrors={clearErrors}
-                    register={register}
-                    setValue={setValue}
-                    watch={watch}
-                    name={counter.name}
-                    id={counter.id}
-                    label={counter.placeHolder}
-                    array={'counterArrayRoom'}
-                    setError={setError}
-                    errors={errors}
-                    min={counter.min}
-                    max={counter.max}
-                  />
-                </>
+                <CounterStep
+                  key={index}
+                  clearErrors={clearErrors}
+                  register={register}
+                  setValue={setValue}
+                  watch={watch}
+                  name={counter.name}
+                  id={counter.id}
+                  label={counter.placeHolder}
+                  array={'counterArrayRoom'}
+                  setError={setError}
+                  errors={errors}
+                  min={counter.min}
+                  max={counter.max}
+                />
               );
             })}
           </motion.div>
@@ -434,11 +455,11 @@ const SurfaceSelect = ({
 
       <button
         className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
-          isValid &&
+          (isValid || valid) &&
           'hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]'
         }  disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed`}
         onClick={nextStepper}
-        disabled={!isValid}
+        disabled={!isValid || !valid}
       >
         {console.log(errors)}
         Continuer{' '}

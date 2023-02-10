@@ -3,8 +3,16 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('widget-cmonbien'));
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <div>Hello world!</div>,
+  },
+]);
 
 root.render(
   <React.StrictMode>

@@ -246,7 +246,10 @@ const DetailsHouse = ({
               className="w-full inline-flex flex-col gap-2"
             >
               <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-                Super! Nous sommes presque prêts à évaluer votre maison
+                Super! Nous sommes presque prêts à évaluer votre{' '}
+                {watch('houseOptions') === 'Appartement'
+                  ? 'appartement'
+                  : 'maison'}
               </p>
             </motion.div>
             <motion.div

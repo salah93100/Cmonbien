@@ -21,6 +21,7 @@ export default function Home() {
     clearErrors,
     setValue,
     control,
+    getFieldState,
     formState: { errors, isValid },
   } = useForm({
     mode: 'all',
@@ -197,6 +198,7 @@ export default function Home() {
           setValue={setValue}
           setError={setError}
           isValid={isValid}
+          getFieldState={getFieldState}
           clearErrors={clearErrors}
         />
 

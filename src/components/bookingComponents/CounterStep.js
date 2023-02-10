@@ -19,20 +19,25 @@ const CounterStep = ({
     const { id, name } = e.target;
 
     if (isNaN(watch(`${array}.${[name]}`)))
-      return setValue(`${array}.${[name]}`, Number(1));
+      return setValue(`${array}.${[name]}`, Number(1), {
+        shouldValidate: true,
+      });
 
     if (watch(`${array}.${[name]}`) < max)
       return (
         setValue(
           `${array}.${[name]}`,
-          Number(watch(`${array}.${[name]}`)) + Number(1)
+          Number(watch(`${array}.${[name]}`)) + Number(1),
+          { shouldValidate: true }
         ) && clearErrors(`${array}.${[name]}`)
       );
   };
   const decreaseCounterAppart = e => {
     const { id, name } = e.target;
     if (Number(watch(`${array}.${[name]}`)) > min) {
-      setValue(`${array}.${[name]}`, Number(watch(`${array}.${[name]}`)) - 1);
+      setValue(`${array}.${[name]}`, Number(watch(`${array}.${[name]}`)) - 1, {
+        shouldValidate: true,
+      });
     }
   };
 
