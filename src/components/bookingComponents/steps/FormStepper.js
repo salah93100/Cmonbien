@@ -36,13 +36,13 @@ const FormStepper = ({
           {' '}
           {console.log(watch())}
           {stepsArray[step]}
-          <motion.div
-            initial={{ y: 100 }}
-            transition={{ duration: 0.6 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-4"
-          >
+          {/*<motion.div*/}
+          {/*  initial={{ y: 100 }}*/}
+          {/*  transition={{ duration: 0.6 }}*/}
+          {/*  whileInView={{ y: 0 }}*/}
+          {/*  viewport={{ once: true }}*/}
+          {/*  className="flex flex-col gap-4"*/}
+          {/*>*/}
             {step < 6 && step !== 2 && step !== 3 ? (
               <button
                 className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
@@ -67,7 +67,7 @@ const FormStepper = ({
             >
               Précedent
             </button>
-          </motion.div>
+          {/*</motion.div>*/}
         </form>
       </BookingUI>
     </>
