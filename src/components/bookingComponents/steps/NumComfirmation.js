@@ -76,8 +76,6 @@ const NumComfirmation = ({
   };
 
   const handleSubmitCode = () => {
-    setStep(prev => prev + 1);
-
     onSubmit();
   };
 
@@ -103,11 +101,17 @@ const NumComfirmation = ({
             containerClass="w-full"
             inputClass="w-full  flex border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
             buttonClass=""
+            disableCountryCode={true}
             onlyCountries={['fr']}
+            alwaysDefaultMask={true}
+            defaultMask={'.. .. .. .. ..'}
             country={'fr'}
             placeholder="Entre votre numéro de tel ..."
-            value={formTel.numPhone}
-            onChange={phone => handleChangeNum(phone)}
+            onChange={(value, data, event, formattedValue) => {
+              const phoneNum = data.dialCode + value.slice(1, 10)
+
+              setFormTel({ ...formTel, phoneNum, })
+            }}
             inputProps={{
               name: 'phone',
               required: true,
@@ -129,7 +133,7 @@ const NumComfirmation = ({
             initial={{ y: 100 }}
             transition={{ duration: 0.3 }}
             whileInView={{ y: 0 }}
-            className="w-full  "
+            className="w-full"
           >
             <input
               name="codePhone"

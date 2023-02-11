@@ -274,7 +274,7 @@ const SurfaceSelect = ({
             viewport={{ once: true }}
           >
             <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-              Quelle est l'année de construction de{' '}
+              Quelle est l'année de construction de {' '}
               {watch('houseOptions') === 'House'
                 ? 'la maison'
                 : "l'appartement"}
