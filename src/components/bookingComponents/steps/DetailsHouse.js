@@ -95,7 +95,8 @@ const DetailsHouse = ({
   }, [stageApart]);
   useEffect(() => {
     if (stepCompoments > 0) {
-      window.scrollTo(0, document.body.scrollHeight);
+      const $p = Array.from(document.querySelectorAll("p")).slice(-1)[0]
+      window.scrollTo(0, $p.getBoundingClientRect().top - 50);
     }
   }, [stepCompoments]);
 
@@ -121,7 +122,7 @@ const DetailsHouse = ({
         whileInView={{ y: 0 }}
         viewport={{ once: true }}
       >
-        <p class="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
+        <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
           Type{' '}
           {booking.houseOptions === 'House' ? 'de Maison' : "d'Appartement"}
         </p>

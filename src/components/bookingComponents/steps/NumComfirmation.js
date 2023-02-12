@@ -15,7 +15,7 @@ const NumComfirmation = ({
   onSubmit,
 }) => {
   const [formTel, setFormTel] = useState({ phoneNum: '', codePhone: '' });
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [disabled, setDisabled] = useState(true);
 
   const handleChangeCode = event => {

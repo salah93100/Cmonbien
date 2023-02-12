@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, {Children, useEffect, useRef} from 'react';
 import BookingUI from '../BookingUI';
 import { motion } from 'framer-motion';
 
