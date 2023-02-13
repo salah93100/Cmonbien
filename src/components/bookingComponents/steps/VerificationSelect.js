@@ -16,7 +16,8 @@ const VerificationSelect = ({
   };
   return (
     <div className="space-y-6">
-      <h1 className="text-4xl text-center">Verification</h1>
+      <h1 className="text-4xl text-center">Vos information</h1>
+      <p className={"text-xl text-center"}>Pour recevoir votre évaluation</p>
       <motion.div
         initial={{ y: 100 }}
         transition={{ duration: 0.3 }}
