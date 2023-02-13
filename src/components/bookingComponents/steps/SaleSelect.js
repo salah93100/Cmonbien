@@ -30,6 +30,17 @@ const SaleSelect = ({
     }
   }, [isValid]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+      $widget.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 250);
+  }, []);
+
   return (
     <div className="space-y-6">
       <motion.div
@@ -50,9 +61,10 @@ const SaleSelect = ({
         className="flex flex-col gap-3 "
       >
         {console.log(isValid + '--------')}
-        {ArraySales.map(sales => {
+        {ArraySales.map((sales, index) => {
           return (
             <label
+              key={index}
               className={`border w-full text-left  px-8 py-4 rounded ${
                 watch('sellingHouse') === sales.value ? 'border-[#005c7c]' : ''
               } `}

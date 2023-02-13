@@ -1,4 +1,4 @@
-import React, {Children, useEffect, useRef} from 'react';
+import React, { Children, useEffect, useRef } from 'react';
 import BookingUI from '../BookingUI';
 import { motion } from 'framer-motion';
 
@@ -45,6 +45,7 @@ const FormStepper = ({
           >
             {step < 6 && step !== 2 && step !== 3 ? (
               <button
+                id={'continue-button'}
                 className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
                   isValid &&
                   'hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]'

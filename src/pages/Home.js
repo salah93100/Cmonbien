@@ -68,7 +68,25 @@ export default function Home({ initialStep = 0, email = '' }) {
   });
 
   useEffect(() => {
-    console.log(getValues());
+    setTimeout(() => {
+      const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+      $widget.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+      $widget.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }, 250);
   }, [step]);
 
   const onSubmit = async () => {
@@ -94,6 +112,8 @@ export default function Home({ initialStep = 0, email = '' }) {
       phoneNum,
       phoneCode,
     } = getValues();
+
+    console.log('here       ', getValues());
 
     const data = {
       lat,
@@ -136,7 +156,9 @@ export default function Home({ initialStep = 0, email = '' }) {
       body: JSON.stringify(data),
     });
 
-    window.parent.location.replace('https://www.cmonbien.fr/estimation-valide?email=' + email)
+    window.parent.location.replace(
+      'https://www.cmonbien.fr/estimation-valide?email=' + email
+    );
   };
 
   return (
@@ -234,7 +256,11 @@ export default function Home({ initialStep = 0, email = '' }) {
           onSubmit={onSubmit}
           register={register}
         />
-        <MessageConfirmation getValues={getValues} email={email} isValid={isValid} />
+        <MessageConfirmation
+          getValues={getValues}
+          email={email}
+          isValid={isValid}
+        />
       </FormStepper>
     </>
   );

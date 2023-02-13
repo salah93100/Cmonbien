@@ -100,6 +100,15 @@ const SurfaceSelect = ({
     }
   }, [disabled]);
 
+  useEffect(() => {
+    const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+    $widget.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, []);
+
   const decreaseCounterAppart = e => {
     setDisabled(true);
 
@@ -145,6 +154,14 @@ const SurfaceSelect = ({
       setStep(prev => prev + 1);
     } else {
       setStepCompoments(prev => prev + 1);
+      setTimeout(() => {
+        const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+        $widget.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+      }, 250);
     }
   };
 
@@ -274,7 +291,7 @@ const SurfaceSelect = ({
             viewport={{ once: true }}
           >
             <p className="px-8 py-4 bg-[#075b9725]  rounded-md rounded-bl-none">
-              Quelle est l'année de construction de {' '}
+              Quelle est l'année de construction de{' '}
               {watch('houseOptions') === 'House'
                 ? 'la maison'
                 : "l'appartement"}

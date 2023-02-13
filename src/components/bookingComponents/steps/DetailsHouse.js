@@ -95,8 +95,14 @@ const DetailsHouse = ({
   }, [stageApart]);
   useEffect(() => {
     if (stepCompoments > 0) {
-      const $p = Array.from(document.querySelectorAll("p")).slice(-1)[0]
-      window.scrollTo(0, $p.getBoundingClientRect().top - 50);
+      setTimeout(() => {
+        const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+        $widget.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+      }, 250);
     }
   }, [stepCompoments]);
 
@@ -129,10 +135,11 @@ const DetailsHouse = ({
       </motion.div>
 
       <div className="flex flex-col gap-3">
-        {radioArray.map(radio => {
+        {radioArray.map((radio, index) => {
           return (
             radio.type === booking.houseOptions && (
               <motion.div
+                key={'label-choice-houseType-' + index}
                 initial={{ y: 100 }}
                 transition={{ duration: 0.5 }}
                 whileInView={{ y: 0 }}
@@ -206,11 +213,12 @@ const DetailsHouse = ({
             ''
           )}
         </motion.div>
-        {CheckExtraArray.map(extra => {
+        {CheckExtraArray.map((extra, index) => {
           return (
             (extra.type === booking.houseOptions || extra.type === 'All') &&
             stepCompoments > 0 && (
               <motion.div
+                key={'label-choice-extra-' + index}
                 initial={{ y: 100 }}
                 transition={{ duration: 0.4 }}
                 whileInView={{ y: 0 }}
@@ -310,6 +318,7 @@ const DetailsHouse = ({
       </div>
 
       <button
+        id="continue-button"
         className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
           isValid &&
           'hover:bg-[#ffffff] hover:text-[#005c7c] hover:border hover:border-[#005c7c]'

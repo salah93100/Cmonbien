@@ -54,6 +54,15 @@ const AdresseSelect = ({
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
       });
+
+      setTimeout(() => {
+        const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+        $widget.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+        });
+      }, 250);
     } else {
       alert('Please enter text');
     }
@@ -65,6 +74,17 @@ const AdresseSelect = ({
       setValue('lng', markerLocation.lng);
     }
   }, [markerLocation]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
+
+      $widget.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 250);
+  }, []);
 
   if (!isLoaded) {
     return (

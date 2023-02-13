@@ -18,6 +18,11 @@ const NumComfirmation = ({
   const [open, setOpen] = useState(true);
   const [disabled, setDisabled] = useState(true);
 
+  useEffect(() => {
+    register('phoneCode');
+    register('phoneNum');
+  }, []);
+
   const handleChangeCode = event => {
     const code = event.target.value;
 
@@ -108,9 +113,10 @@ const NumComfirmation = ({
             country={'fr'}
             placeholder="Entre votre numéro de tel ..."
             onChange={(value, data, event, formattedValue) => {
-              const phoneNum = data.dialCode + value.slice(1, 10)
+              const phoneNum = data.dialCode + value.slice(1, 10);
 
-              setFormTel({ ...formTel, phoneNum, })
+              setFormTel({ ...formTel, phoneNum });
+              setValue('phoneNum', phoneNum);
             }}
             inputProps={{
               name: 'phone',
