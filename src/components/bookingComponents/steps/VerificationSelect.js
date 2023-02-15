@@ -34,10 +34,10 @@ const VerificationSelect = ({
       setStepVerification(prev => prev + 1);
       window.scrollTo({ top: 0 });
     }
-      
-   
-     
-    
+
+
+
+
   };
 
   const handleSubmitNum = () => {
@@ -61,7 +61,7 @@ const VerificationSelect = ({
     onSubmit();
     setStep((prev)=>prev+1)
   };
-  
+
   const handleChangeCode = event => {
     const code = event.target.value;
 
@@ -91,7 +91,7 @@ const VerificationSelect = ({
     }
   }, [formTel]);
 
-  
+
 
 
   return (
@@ -153,7 +153,7 @@ const VerificationSelect = ({
          }
 
 <div className="space-y-6 flex flex-col gap-2 ">
-    
+
 {stepVerification>0?(<div className="text-center  space-y-6 ">
         <p className="text-4xl my-5">Numéro de Vérification</p>
         <motion.div
@@ -193,9 +193,9 @@ const VerificationSelect = ({
       </button>
         </motion.div>
       </div>):""}
-      
-    
-      {stepVerification>1 ? (
+
+
+      {stepVerification>0 ? (
         <>
           <motion.div
             initial={{ y: 100 }}
@@ -236,7 +236,7 @@ const VerificationSelect = ({
         onClick={nextStepper}
         disabled={!isValid}
       >
-        Continuererer{' '}
+        Continuer{' '}
       </button>):""}
     </div>
     </div>
