@@ -8,7 +8,6 @@ import DetailsHouse from '../components/bookingComponents/steps/DetailsHouse';
 import SurfaceSelect from '../components/bookingComponents/steps/SurfaceSelect';
 import SaleSelect from '../components/bookingComponents/steps/SaleSelect';
 import VerificationSelect from '../components/bookingComponents/steps/VerificationSelect';
-import NumComfirmation from '../components/bookingComponents/steps/NumComfirmation';
 import MessageConfirmation from '../components/bookingComponents/steps/MessageConfirmation';
 
 export default function Home({ initialStep = 0, email = '' }) {
@@ -240,22 +239,15 @@ export default function Home({ initialStep = 0, email = '' }) {
           setBooking={setBooking}
           booking={booking}
           nextStep={nextStep}
-          setNextStep={setNextStep}
+          setStep={setStep}
           register={register}
           errors={errors}
           isValid={isValid}
+          onSubmit={onSubmit}
+          setValue={setValue}
           required
         />
-        <NumComfirmation
-          setStep={setStep}
-          isValid={isValid}
-          Controller={Controller}
-          control={control}
-          setValue={setValue}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          register={register}
-        />
+      
         <MessageConfirmation
           getValues={getValues}
           email={email}

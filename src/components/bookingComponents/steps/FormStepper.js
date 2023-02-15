@@ -34,7 +34,7 @@ const FormStepper = ({
           className="space-y-6"
         >
           {' '}
-          {console.log(watch())}
+          
           {stepsArray[step]}
           <motion.div
             initial={{ y: 100 }}
@@ -43,7 +43,7 @@ const FormStepper = ({
             viewport={{ once: true }}
             className="flex flex-col gap-4"
           >
-            {step < 6 && step !== 2 && step !== 3 ? (
+            {step < 6 && step !== 2 && step !== 3 && step !== 5? (
               <button
                 id={'continue-button'}
                 className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
@@ -61,7 +61,7 @@ const FormStepper = ({
 
             <button
               className={
-                (step == 0 || step == 7 ? 'hidden' : '') +
+                (step === 0 || step === 6 ? 'hidden' : '') +
                 ' px-8 py-4 bg-slate-700 text-white rounded w-full hover:bg-[#ffffff] hover:text-slate-700 hover:border hover:border-slate-700'
               }
               onClick={buttonPrecedStepper}
