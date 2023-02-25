@@ -60,7 +60,6 @@ const SaleSelect = ({
         whileInView={{ y: 0 }}
         className="flex flex-col gap-3 "
       >
-        {console.log(isValid + '--------')}
         {ArraySales.map((sales, index) => {
           return (
             <label

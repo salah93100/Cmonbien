@@ -121,7 +121,6 @@ const DetailsHouse = ({
 
   return (
     <div className="space-y-6 flex flex-col gap-1">
-      {console.log(isValid)}
       <motion.div
         initial={{ y: 100 }}
         transition={{ duration: 0.3 }}

@@ -74,7 +74,6 @@ const SurfaceSelect = ({
     setDisabled(true);
 
     const { name, id, value } = e.target;
-    console.log(id);
     if (id === 'ArrayCounterRoomParking') {
       setCounterArrayRoom(prevState => ({
         ...counterArrayRoom,
@@ -92,7 +91,6 @@ const SurfaceSelect = ({
   };
 
   useEffect(() => {
-    console.log('ok');
     if (errors.counterArrayRoom) {
       setValid(false);
     } else {
@@ -478,7 +476,6 @@ const SurfaceSelect = ({
         onClick={nextStepper}
         disabled={!isValid || !valid}
       >
-        {console.log(errors)}
         Continuer{' '}
       </button>
     </div>

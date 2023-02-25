@@ -44,7 +44,6 @@ const CounterStep = ({
   return (
     <>
       <label>{label}</label>
-      {console.log(watch())}
       <div className="rounded-l inline-flex">
         <button
           className="border px-8 py-4 rounded-l"
@@ -70,7 +69,6 @@ const CounterStep = ({
           })}
           className="inline-flex border px-8 py-4 outline-none text-center w-full"
         />
-        {console.log(errors)}
         <button
           className="border px-8 py-4 rounded-r"
           id={id}

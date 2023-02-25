@@ -89,7 +89,6 @@ export default function Home({ initialStep = 0, email = '' }) {
   }, [step]);
 
   const onSubmit = async () => {
-    console.log(getValues());
     const {
       lat,
       lng,
@@ -111,8 +110,6 @@ export default function Home({ initialStep = 0, email = '' }) {
       phoneNum,
       phoneCode,
     } = getValues();
-
-    console.log('here       ', getValues());
 
     const data = {
       lat,
