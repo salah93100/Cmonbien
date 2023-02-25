@@ -155,9 +155,7 @@ export default function Home({ initialStep = 0, email = '' }) {
       body: JSON.stringify(data),
     });
 
-    window.parent.location.replace(
-      'https://www.cmonbien.fr/estimation-valide?email=' + email
-    );
+    window.location.href = 'https://www.cmonbien.fr/estimation-valide?email=' + email
   };
 
   return (
@@ -247,7 +245,7 @@ export default function Home({ initialStep = 0, email = '' }) {
           setValue={setValue}
           required
         />
-      
+
         <MessageConfirmation
           getValues={getValues}
           email={email}
