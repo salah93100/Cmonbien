@@ -19,6 +19,7 @@ const VerificationSelect = ({
   const [open, setOpen] = useState(true);
   const [stepVerification, setStepVerification] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const [code, setCode] = useState('');
 
   useEffect(() => {
     register('phoneCode');
@@ -67,7 +68,7 @@ const VerificationSelect = ({
 
     setFormTel({
       ...formTel,
-      phoneCode: code,
+      codePhone: code,
     });
 
     if (code.length > 4) {
@@ -80,6 +81,9 @@ const VerificationSelect = ({
     }
 
     setValue('phoneCode', code);
+    setCode(code)
+
+    console.log(code)
 
     if (code.length == 4) {
       setDisabled(false);
@@ -218,6 +222,7 @@ const VerificationSelect = ({
           >
             <button
               className="px-8 py-4 bg-[#005c7c] text-white rounded w-full disabled:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled={(formTel.codePhone.length != 4) || (formTel.phoneNum.length != 11)}
               onClick={handleSubmitCode}
             >
               Je veux recevoir mon estimation, cliquez ici!
