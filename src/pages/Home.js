@@ -18,6 +18,7 @@ export default function Home({ initialStep = 0, email = '' }) {
     watch,
     setError,
     clearErrors,
+    resetField,
     setValue,
     control,
     getFieldState,
@@ -43,9 +44,13 @@ export default function Home({ initialStep = 0, email = '' }) {
     },
   });
 
+  console.log(errors);
+
   const [step, setStep] = useState(initialStep);
   const [nextStep, setNextStep] = useState(true);
   const [booking, setBooking] = useState({
+    lat: null,
+    lng: null,
     adress: '',
     houseOptions: '',
     houseType: '',
@@ -152,7 +157,8 @@ export default function Home({ initialStep = 0, email = '' }) {
       body: JSON.stringify(data),
     });
 
-    window.location.href = 'https://www.cmonbien.fr/estimation-valide?email=' + email
+    window.location.href =
+      'https://www.cmonbien.fr/estimation-valide?email=' + email;
   };
 
   return (
@@ -162,12 +168,14 @@ export default function Home({ initialStep = 0, email = '' }) {
         setStep={setStep}
         nextStep={nextStep}
         setNextStep={setNextStep}
+        getValues={getValues}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         isValid={isValid}
         watch={watch}
       >
         <AdresseSelect
+          resetField={resetField}
           setBooking={setBooking}
           booking={booking}
           nextStep={nextStep}

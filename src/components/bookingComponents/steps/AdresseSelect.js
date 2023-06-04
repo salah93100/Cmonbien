@@ -14,6 +14,7 @@ import { motion } from 'framer-motion';
 import { getValue } from '@testing-library/user-event/dist/utils';
 
 const AdresseSelect = ({
+  resetField,
   setBooking,
   booking,
   setNextStep,
@@ -43,17 +44,28 @@ const AdresseSelect = ({
   }
 
   function onPlaceChanged() {
+    resetField('lat');
+    resetField('lng');
     if (searchResults != null) {
       const place = searchResults.getPlace();
 
       const formattedAddress = {
         address: place.formatted_address,
       };
-      setBooking({ ...booking, adress: formattedAddress.address });
       setMarkerLocation({
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
       });
+
+      setBooking({
+        ...booking,
+        adress: formattedAddress.address,
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+
+      setValue('lat', place.geometry.location.lat());
+      setValue('lng', place.geometry.location.lng());
 
       setTimeout(() => {
         const $widget = document.querySelector('#widget-cmonbien'); // Array.from(document.querySelectorAll("p.px-8.py-4.rounded-md.rounded-bl-none")).slice(-1)[0]
@@ -68,12 +80,12 @@ const AdresseSelect = ({
     }
   }
 
-  useEffect(() => {
-    if (markerLocation) {
-      setValue('lat', markerLocation.lat);
-      setValue('lng', markerLocation.lng);
-    }
-  }, [markerLocation]);
+  // useEffect(() => {
+  //   if (markerLocation) {
+  //     setValue('lat', markerLocation.lat);
+  //     setValue('lng', markerLocation.lng);
+  //   }
+  // }, [markerLocation]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -98,9 +110,6 @@ const AdresseSelect = ({
   }
   return (
     <div className="space-y-6 w-full ">
-      <input type="hidden" {...register('lat', { pattern: /^[A-Za-z]+$/i })} />
-      <input type="hidden" {...register('lng', { pattern: /^[A-Za-z]+$/i })} />
-
       <motion.div
         initial={{ y: 100 }}
         transition={{ duration: 0.3 }}
@@ -129,11 +138,13 @@ const AdresseSelect = ({
         <input
           type="text"
           name="adress"
-          {...register(
-            'adress',
-            { required: 'Veuillez entrez votre adresse' },
-            { pattern: /^[A-Za-z]+$/i }
-          )}
+          {...register('adress', {
+            required: 'Veuillez entrez votre adresse',
+            onChange: () => {
+              resetField('lat');
+              resetField('lng');
+            },
+          })}
           placeholder="Adresse..."
           className="border px-8 py-4 focus:outline-none focus:ring-1 focus:border-[#005c7c] focus:ring-[#005c7c] w-full rounded"
         />
@@ -166,6 +177,8 @@ const AdresseSelect = ({
       >
         {markerLocation ? <Marker position={markerLocation} /> : ''}
       </GoogleMap>
+      <input type="hidden" {...register('lat', { required: true })} />
+      <input type="hidden" {...register('lng', { required: true })} />
     </div>
   );
 };

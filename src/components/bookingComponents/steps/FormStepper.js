@@ -7,6 +7,7 @@ const FormStepper = ({
   step,
   setStep,
   nextStep,
+  getValues,
   setNextStep,
   handleSubmit,
   onSubmit,
@@ -14,6 +15,8 @@ const FormStepper = ({
   watch,
 }) => {
   const stepsArray = Children.toArray(children);
+
+  console.log(getValues('adress'), getValues('lat'), getValues('lng'));
   const buttonNextStepper = () => {
     setNextStep(true);
     setStep(prev => prev + 1);
@@ -34,7 +37,6 @@ const FormStepper = ({
           className="space-y-6"
         >
           {' '}
-          
           {stepsArray[step]}
           <motion.div
             initial={{ y: 100 }}
@@ -43,7 +45,7 @@ const FormStepper = ({
             viewport={{ once: true }}
             className="flex flex-col gap-4"
           >
-            {step < 6 && step !== 2 && step !== 3 && step !== 5? (
+            {step < 6 && step !== 2 && step !== 3 && step !== 5 ? (
               <button
                 id={'continue-button'}
                 className={`px-8 py-4 bg-[#005c7c] text-white rounded w-full ${
